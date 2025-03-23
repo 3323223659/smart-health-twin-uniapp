@@ -1,0 +1,134 @@
+{
+	
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "white" // 导航栏字体颜色
+			}
+		},
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+
+			}
+		},
+		{
+			"path": "pages/twin/twin",
+			"style": {
+				"navigationBarTitleText": "孪生",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+
+
+			}
+		},
+		{
+			"path": "pages/chat/chat",
+			"style": {
+				"navigationBarTitleText": "Chat",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "my",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+			}
+		},
+		{
+			"path": "pages/my/second/setting",
+			"style": {
+				"navigationBarTitleText": "setting",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+			}
+		},
+		{
+			"path": "pages/my/second/problem",
+			"style": {
+				"navigationBarTitleText": "problem",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+			}
+		},
+		{
+			"path": "pages/my/second/clock",
+			"style": {
+				"navigationBarTitleText": "clock",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+			}
+		},
+		{
+			"path": "pages/my/second/userInfo",
+			"style": {
+				"navigationBarTitleText": "userInfo",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+			}
+		},
+		{
+			"path": "pages/my/second/upLoad",
+			"style": {
+				"navigationBarTitleText": "upLoad",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+			}
+		},
+		{
+			"path": "pages/my/second/physical",
+			"style": {
+				"navigationBarTitleText": "physical",
+				"navigationStyle": "custom", // 自定义导航栏
+				"navigationBarTextStyle": "black" // 导航栏字体颜色
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#1a58c4",
+		"backgroundColor": "#F8F8F8",
+		"borderStyle": "black",
+		"list": [{
+				"text": "首页",
+				"pagePath": "pages/home/home",
+				"iconPath": "static/icon/home.png",
+				"selectedIconPath": "static/icon/home-selected.png"
+			},
+			{
+				"text": "孪生",
+				"pagePath": "pages/twin/twin",
+				"iconPath": "static/icon/twin.png",
+				"selectedIconPath": "static/icon/twin-selected.png"
+			},
+			{
+				"text": "Chat",
+				"pagePath": "pages/chat/chat",
+				"iconPath": "static/icon/chat.png",
+				"selectedIconPath": "static/icon/chat-selected.png"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/my/my",
+				"iconPath": "static/icon/my.png",
+				"selectedIconPath": "static/icon/my-selected.png"
+			}
+		]
+	}
+}

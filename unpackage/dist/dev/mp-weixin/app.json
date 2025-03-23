@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/twin/twin",
+    "pages/chat/chat",
+    "pages/my/my",
+    "pages/my/second/setting",
+    "pages/my/second/problem",
+    "pages/my/second/clock",
+    "pages/my/second/userInfo",
+    "pages/my/second/upLoad",
+    "pages/my/second/physical"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#1a58c4",
+    "backgroundColor": "#F8F8F8",
+    "borderStyle": "black",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/home/home",
+        "iconPath": "static/icon/home.png",
+        "selectedIconPath": "static/icon/home-selected.png"
+      },
+      {
+        "text": "孪生",
+        "pagePath": "pages/twin/twin",
+        "iconPath": "static/icon/twin.png",
+        "selectedIconPath": "static/icon/twin-selected.png"
+      },
+      {
+        "text": "Chat",
+        "pagePath": "pages/chat/chat",
+        "iconPath": "static/icon/chat.png",
+        "selectedIconPath": "static/icon/chat-selected.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/my",
+        "iconPath": "static/icon/my.png",
+        "selectedIconPath": "static/icon/my-selected.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,1 @@
+<view><view class="page-container"><view class="navbar" style="{{'padding-top:'+(safeAreaInsets.top+'px')+';'}}"></view><view class="content"><view class="text-area"></view></view></view></view>
