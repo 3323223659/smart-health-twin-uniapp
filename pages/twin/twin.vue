@@ -9,6 +9,12 @@
 				</canvas>
 			</view>
 		</view>
+		<view style="position: fixed; width: 100%; height: 100%; top: 0; left: 0;">
+			<van-popup :show="showPopup" @close="showPopup = false" style="height: 100rpx;width: 100rpx;">
+				这里是弹窗内容
+			</van-popup>
+		</view>
+
 	</view>
 </template>
 
@@ -23,6 +29,7 @@
 		data() {
 			return {
 				mSceneWidth: 0,
+				showPopup: false,
 				mSceneHeight: 0,
 				worldFocus: null,
 				mCanvasId: null,
@@ -30,6 +37,7 @@
 				mCamera: null,
 				renderer: null,
 				renderAnimFrameId: null,
+				closePopupTimer: null,
 				safeAreaInsets: uni.getSystemInfoSync().safeAreaInsets || {
 					top: 0
 				}
@@ -45,43 +53,30 @@
 		},
 		// 页面加载完毕后
 		onReady() {
-			// 获取 canvas 元素, 初始化 Three
 			uni.createSelectorQuery().select('#scene').node().exec((res) => {
-				// 获取 canvasId
+				if (!res[0] || !res[0].node) {
+					console.error("获取 canvas 失败");
+					return;
+				}
 				this.mCanvasId = res[0].node._canvasId;
-				// 注册画布
+				console.log("mCanvasId:", this.mCanvasId);
 				const mCanvas = THREE.global.registerCanvas(this.mCanvasId, res[0].node);
-				// 开始初始化
-				this.init(mCanvas);
-			});
-		},
-		// 页面加载时
-		onLoad(option) {
-			// 获取手机屏幕宽高
-			this.mSceneWidth = uni.getWindowInfo().windowWidth;
-			this.mSceneHeight = uni.getWindowInfo().windowHeight;
-			// 设置世界中心
-			this.worldFocus = new THREE.Vector3(0, 0, 0);
-		},
-		// 页面加载完毕后
-		onReady() {
-			// 获取 canvas 元素, 初始化 Three
-			uni.createSelectorQuery().select('#scene').node().exec((res) => {
-				// 获取 canvasId
-				this.mCanvasId = res[0].node._canvasId;
-				// 注册画布
-				const mCanvas = THREE.global.registerCanvas(this.mCanvasId, res[0].node);
-				// 开始初始化
 				this.init(mCanvas);
 			});
 		},
 		// 页面卸载时
 		onUnload() {
-			// 清理渲染帧动画
-			THREE.global.canvas && THREE.global.canvas.cancelAnimationFrame(this.renderAnimFrameId);
-			// 清理canvas对象
-			THREE.global.unregisterCanvas(this.mCanvasId);
-			console.log("Unload");
+			console.log("Unload", this.mCanvasId);
+
+			if (this.renderAnimFrameId && THREE.global.canvas) {
+				THREE.global.canvas.cancelAnimationFrame(this.renderAnimFrameId);
+			}
+
+			if (this.mCanvasId) {
+				THREE.global.unregisterCanvas(this.mCanvasId);
+			} else {
+				console.warn("mCanvasId 为空，跳过 unregisterCanvas");
+			}
 		},
 		methods: {
 			// 初始化
@@ -102,11 +97,14 @@
 				const light2 = new THREE.DirectionalLight(0xffffff); // 平行光（颜色， 光照强度）
 				light2.position.set(0, 0, 20);
 				this.mScene.add(light2);
+				this.mScene.background = null;
+
 
 				// 创建渲染器
 				const renderer = new THREE.WebGLRenderer({
 					antialias: true,
-					alpha: true
+					alpha: true,
+
 				});
 				renderer.setSize(this.mSceneWidth, this.mSceneHeight);
 
@@ -121,11 +119,11 @@
 				let GLTFloader = GLTF(THREE)
 				const loader = new GLTFloader();
 				// 异步加载模型
-				// 微信小程序不允许加载本地模型，必须通过 https 获取
-				loader.load("https://threejs.org/examples/models/gltf/Stork.glb", (gltf) => {
+				// 微信小程序不允许加载本地模型，必须通过 https 获取https://threejs.org/examples/models/gltf/Stork.glb
+				loader.load("https://soevereign.oss-cn-shenzhen.aliyuncs.com/man.gltf", (gltf) => {
 					const model = gltf.scene;
 					model.position.set(0, 0, 0); // 设置模型位置
-					model.scale.set(0.1, 0.1, 0.1); // 设置模型大小
+					model.scale.set(16, 16, 16); // 设置模型大小
 					this.mScene.add(model);
 					// 模型加载到场景后，开启渲染
 					render();
@@ -148,7 +146,27 @@
 			},
 			// 触摸开始
 			touchStart(e) {
-				THREE.global.touchEventHandlerFactory('canvas', 'touchstart')(e)
+				const touch = e.touches[0];
+				const raycaster = new THREE.Raycaster();
+				const mouse = new THREE.Vector2();
+
+				// 计算点击位置
+				mouse.x = (touch.clientX / this.mSceneWidth) * 2 - 1;
+				mouse.y = -(touch.clientY / this.mSceneHeight) * 2 + 1;
+
+				// 计算射线
+				raycaster.setFromCamera(mouse, this.mCamera);
+
+				// 检测交叉点
+				const intersects = raycaster.intersectObjects(this.mScene.children, true);
+				if (intersects.length > 0) {
+					console.log("点击了模型", intersects[0].object);
+					this.showPopup = true;
+				} else {
+					console.log("未点击到模型");
+				}
+
+				THREE.global.touchEventHandlerFactory('canvas', 'touchstart')(e);
 			},
 			// 触摸移动中
 			touchMove(e) {
@@ -156,8 +174,16 @@
 			},
 			// 触摸结束
 			touchEnd(e) {
-				THREE.global.touchEventHandlerFactory('canvas', 'touchend')(e)
-			},
+				// 如果之前有定时器，清除它
+				if (this.closePopupTimer) {
+					clearTimeout(this.closePopupTimer);
+				}
+
+				// 设置新的定时器，延迟关闭弹框
+				this.closePopupTimer = setTimeout(() => {
+					this.showPopup = false; // 关闭弹框
+				}, 1500); // 1.5秒后关闭弹框
+			}
 		}
 	};
 </script>
@@ -194,5 +220,18 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.scene {
+		background: transparent;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+
+	}
+
+	.van-popup {
+		z-index: 9999 !important;
 	}
 </style>

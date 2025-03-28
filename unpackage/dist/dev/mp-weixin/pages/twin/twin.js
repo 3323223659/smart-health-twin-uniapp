@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/twin/twin"],{
 
 /***/ 53:
-/*!*****************************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/main.js?{"page":"pages%2Ftwin%2Ftwin"} ***!
-  \*****************************************************************************/
+/*!************************************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/main.js?{"page":"pages%2Ftwin%2Ftwin"} ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22,9 +22,9 @@ createPage(_twin.default);
 /***/ }),
 
 /***/ 54:
-/*!**********************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/pages/twin/twin.vue ***!
-  \**********************************************************/
+/*!*****************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/pages/twin/twin.vue ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -63,9 +63,9 @@ component.options.__file = "pages/twin/twin.vue"
 /***/ }),
 
 /***/ 55:
-/*!*****************************************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/pages/twin/twin.vue?vue&type=template&id=367d73f4& ***!
-  \*****************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/pages/twin/twin.vue?vue&type=template&id=367d73f4& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -85,9 +85,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 56:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/WeChat/uni-app/smart-health/pages/twin/twin.vue?vue&type=template&id=367d73f4& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/WeChat/uni-app/smart-health-uniapp/pages/twin/twin.vue?vue&type=template&id=367d73f4& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -102,6 +102,11 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.showPopup = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -112,9 +117,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 57:
-/*!***********************************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/pages/twin/twin.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************/
+/*!******************************************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/pages/twin/twin.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -128,9 +133,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 58:
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/WeChat/uni-app/smart-health/pages/twin/twin.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/WeChat/uni-app/smart-health-uniapp/pages/twin/twin.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -143,17 +148,36 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var THREE = _interopRequireWildcard(__webpack_require__(/*! ../../lib/three.weapp.js */ 59));
 var _OrbitControls = __webpack_require__(/*! ../../lib/OrbitControls.js */ 60);
 var _GLTFLoader = _interopRequireDefault(__webpack_require__(/*! ../../lib/GLTFLoader.js */ 61));
-var _data$onLoad$onReady$;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-var _default = (_data$onLoad$onReady$ = {
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
   data: function data() {
     return {
       mSceneWidth: 0,
+      showPopup: false,
       mSceneHeight: 0,
       worldFocus: null,
       mCanvasId: null,
@@ -161,6 +185,7 @@ var _default = (_data$onLoad$onReady$ = {
       mCamera: null,
       renderer: null,
       renderAnimFrameId: null,
+      closePopupTimer: null,
       safeAreaInsets: uni.getSystemInfoSync().safeAreaInsets || {
         top: 0
       }
@@ -177,125 +202,145 @@ var _default = (_data$onLoad$onReady$ = {
   // 页面加载完毕后
   onReady: function onReady() {
     var _this = this;
-    // 获取 canvas 元素, 初始化 Three
     uni.createSelectorQuery().select('#scene').node().exec(function (res) {
-      // 获取 canvasId
+      if (!res[0] || !res[0].node) {
+        console.error("获取 canvas 失败");
+        return;
+      }
       _this.mCanvasId = res[0].node._canvasId;
-      // 注册画布
+      console.log("mCanvasId:", _this.mCanvasId);
       var mCanvas = THREE.global.registerCanvas(_this.mCanvasId, res[0].node);
-      // 开始初始化
       _this.init(mCanvas);
     });
+  },
+  // 页面卸载时
+  onUnload: function onUnload() {
+    console.log("Unload", this.mCanvasId);
+    if (this.renderAnimFrameId && THREE.global.canvas) {
+      THREE.global.canvas.cancelAnimationFrame(this.renderAnimFrameId);
+    }
+    if (this.mCanvasId) {
+      THREE.global.unregisterCanvas(this.mCanvasId);
+    } else {
+      console.warn("mCanvasId 为空，跳过 unregisterCanvas");
+    }
+  },
+  methods: {
+    // 初始化
+    init: function init(canvas) {
+      var _this2 = this;
+      // 创建场景
+      this.mScene = new THREE.Scene();
+      this.mScene.background = new THREE.Color("#e6e6e6"); // 场景背景颜色
+
+      // 创建摄像机
+      this.mCamera = new THREE.PerspectiveCamera(75, this.mSceneWidth / this.mSceneHeight, 0.1, 100);
+      this.mCamera.position.set(0, 0, 20);
+      this.mCamera.lookAt(this.worldFocus);
+
+      // 创建光线
+      var light1 = new THREE.HemisphereLight(0xffffff, 0x444444); // 半球光（天空颜色，地面颜色，光照强度）
+      light1.position.set(0, 20, 0);
+      this.mScene.add(light1);
+      var light2 = new THREE.DirectionalLight(0xffffff); // 平行光（颜色， 光照强度）
+      light2.position.set(0, 0, 20);
+      this.mScene.add(light2);
+      this.mScene.background = null;
+
+      // 创建渲染器
+      var renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true
+      });
+      renderer.setSize(this.mSceneWidth, this.mSceneHeight);
+
+      // 创建控制器
+      var controls = new _OrbitControls.OrbitControls(this.mCamera, renderer.domElement);
+      controls.target.set(this.worldFocus.x, this.worldFocus.y, this.worldFocus.z); // 摄像机围绕旋转的中心
+      controls.enablePan = false; // 禁止摄像机平移
+      controls.enableDamping = true; // 设置阻尼，需要在 update 调用
+      controls.dampingFactor = 0.09;
+
+      // 创建 glb 加载器
+      var GLTFloader = (0, _GLTFLoader.default)(THREE);
+      var loader = new GLTFloader();
+      // 异步加载模型
+      // 微信小程序不允许加载本地模型，必须通过 https 获取https://threejs.org/examples/models/gltf/Stork.glb
+      loader.load("https://soevereign.oss-cn-shenzhen.aliyuncs.com/man.gltf", function (gltf) {
+        var model = gltf.scene;
+        model.position.set(0, 0, 0); // 设置模型位置
+        model.scale.set(16, 16, 16); // 设置模型大小
+        _this2.mScene.add(model);
+        // 模型加载到场景后，开启渲染
+        render();
+      });
+
+      // 渲染（闭包）
+      var render = function render() {
+        // 帧动画
+        _this2.renderAnimFrameId = canvas.requestAnimationFrame(render);
+
+        //光源跟随相机
+        var vector = _this2.mCamera.position.clone();
+        light2.position.set(vector.x, vector.y, vector.z);
+
+        // 控制器
+        if (controls.enabled) controls.update();
+        // 渲染场景
+        renderer.render(_this2.mScene, _this2.mCamera);
+      };
+    },
+    // 触摸开始
+    touchStart: function touchStart(e) {
+      var touch = e.touches[0];
+      var raycaster = new THREE.Raycaster();
+      var mouse = new THREE.Vector2();
+
+      // 计算点击位置
+      mouse.x = touch.clientX / this.mSceneWidth * 2 - 1;
+      mouse.y = -(touch.clientY / this.mSceneHeight) * 2 + 1;
+
+      // 计算射线
+      raycaster.setFromCamera(mouse, this.mCamera);
+
+      // 检测交叉点
+      var intersects = raycaster.intersectObjects(this.mScene.children, true);
+      if (intersects.length > 0) {
+        console.log("点击了模型", intersects[0].object);
+        this.showPopup = true;
+      } else {
+        console.log("未点击到模型");
+      }
+      THREE.global.touchEventHandlerFactory('canvas', 'touchstart')(e);
+    },
+    // 触摸移动中
+    touchMove: function touchMove(e) {
+      THREE.global.touchEventHandlerFactory('canvas', 'touchmove')(e);
+    },
+    // 触摸结束
+    touchEnd: function touchEnd(e) {
+      var _this3 = this;
+      // 如果之前有定时器，清除它
+      if (this.closePopupTimer) {
+        clearTimeout(this.closePopupTimer);
+      }
+
+      // 设置新的定时器，延迟关闭弹框
+      this.closePopupTimer = setTimeout(function () {
+        _this3.showPopup = false; // 关闭弹框
+      }, 1500); // 1.5秒后关闭弹框
+    }
   }
-}, (0, _defineProperty2.default)(_data$onLoad$onReady$, "onLoad", function onLoad(option) {
-  // 获取手机屏幕宽高
-  this.mSceneWidth = uni.getWindowInfo().windowWidth;
-  this.mSceneHeight = uni.getWindowInfo().windowHeight;
-  // 设置世界中心
-  this.worldFocus = new THREE.Vector3(0, 0, 0);
-}), (0, _defineProperty2.default)(_data$onLoad$onReady$, "onReady", function onReady() {
-  var _this2 = this;
-  // 获取 canvas 元素, 初始化 Three
-  uni.createSelectorQuery().select('#scene').node().exec(function (res) {
-    // 获取 canvasId
-    _this2.mCanvasId = res[0].node._canvasId;
-    // 注册画布
-    var mCanvas = THREE.global.registerCanvas(_this2.mCanvasId, res[0].node);
-    // 开始初始化
-    _this2.init(mCanvas);
-  });
-}), (0, _defineProperty2.default)(_data$onLoad$onReady$, "onUnload", function onUnload() {
-  // 清理渲染帧动画
-  THREE.global.canvas && THREE.global.canvas.cancelAnimationFrame(this.renderAnimFrameId);
-  // 清理canvas对象
-  THREE.global.unregisterCanvas(this.mCanvasId);
-  console.log("Unload");
-}), (0, _defineProperty2.default)(_data$onLoad$onReady$, "methods", {
-  // 初始化
-  init: function init(canvas) {
-    var _this3 = this;
-    // 创建场景
-    this.mScene = new THREE.Scene();
-    this.mScene.background = new THREE.Color("#e6e6e6"); // 场景背景颜色
-
-    // 创建摄像机
-    this.mCamera = new THREE.PerspectiveCamera(75, this.mSceneWidth / this.mSceneHeight, 0.1, 100);
-    this.mCamera.position.set(0, 0, 20);
-    this.mCamera.lookAt(this.worldFocus);
-
-    // 创建光线
-    var light1 = new THREE.HemisphereLight(0xffffff, 0x444444); // 半球光（天空颜色，地面颜色，光照强度）
-    light1.position.set(0, 20, 0);
-    this.mScene.add(light1);
-    var light2 = new THREE.DirectionalLight(0xffffff); // 平行光（颜色， 光照强度）
-    light2.position.set(0, 0, 20);
-    this.mScene.add(light2);
-
-    // 创建渲染器
-    var renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true
-    });
-    renderer.setSize(this.mSceneWidth, this.mSceneHeight);
-
-    // 创建控制器
-    var controls = new _OrbitControls.OrbitControls(this.mCamera, renderer.domElement);
-    controls.target.set(this.worldFocus.x, this.worldFocus.y, this.worldFocus.z); // 摄像机围绕旋转的中心
-    controls.enablePan = false; // 禁止摄像机平移
-    controls.enableDamping = true; // 设置阻尼，需要在 update 调用
-    controls.dampingFactor = 0.09;
-
-    // 创建 glb 加载器
-    var GLTFloader = (0, _GLTFLoader.default)(THREE);
-    var loader = new GLTFloader();
-    // 异步加载模型
-    // 微信小程序不允许加载本地模型，必须通过 https 获取
-    loader.load("https://threejs.org/examples/models/gltf/Stork.glb", function (gltf) {
-      var model = gltf.scene;
-      model.position.set(0, 0, 0); // 设置模型位置
-      model.scale.set(0.1, 0.1, 0.1); // 设置模型大小
-      _this3.mScene.add(model);
-      // 模型加载到场景后，开启渲染
-      render();
-    });
-
-    // 渲染（闭包）
-    var render = function render() {
-      // 帧动画
-      _this3.renderAnimFrameId = canvas.requestAnimationFrame(render);
-
-      //光源跟随相机
-      var vector = _this3.mCamera.position.clone();
-      light2.position.set(vector.x, vector.y, vector.z);
-
-      // 控制器
-      if (controls.enabled) controls.update();
-      // 渲染场景
-      renderer.render(_this3.mScene, _this3.mCamera);
-    };
-  },
-  // 触摸开始
-  touchStart: function touchStart(e) {
-    THREE.global.touchEventHandlerFactory('canvas', 'touchstart')(e);
-  },
-  // 触摸移动中
-  touchMove: function touchMove(e) {
-    THREE.global.touchEventHandlerFactory('canvas', 'touchmove')(e);
-  },
-  // 触摸结束
-  touchEnd: function touchEnd(e) {
-    THREE.global.touchEventHandlerFactory('canvas', 'touchend')(e);
-  }
-}), _data$onLoad$onReady$);
+};
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
 /***/ 62:
-/*!********************************************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/pages/twin/twin.vue?vue&type=style&index=0&lang=scss& ***!
-  \********************************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/pages/twin/twin.vue?vue&type=style&index=0&lang=scss& ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -309,9 +354,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 63:
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/WeChat/uni-app/smart-health/pages/twin/twin.vue?vue&type=style&index=0&lang=scss& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/WeChat/uni-app/smart-health-uniapp/pages/twin/twin.vue?vue&type=style&index=0&lang=scss& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

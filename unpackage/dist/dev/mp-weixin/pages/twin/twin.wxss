@@ -51,3 +51,13 @@ page {
   align-items: center;
   justify-content: center;
 }
+.scene {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.van-popup {
+  z-index: 9999 !important;
+}

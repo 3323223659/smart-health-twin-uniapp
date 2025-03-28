@@ -1,5 +1,5 @@
 {
-	
+
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/login/login",
@@ -24,9 +24,9 @@
 				"navigationBarTitleText": "孪生",
 				"navigationStyle": "custom", // 自定义导航栏
 				"navigationBarTextStyle": "black" // 导航栏字体颜色
-
-
+				
 			}
+			
 		},
 		{
 			"path": "pages/chat/chat",
@@ -98,7 +98,11 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"usingComponents": {
+			"van-popup": "wxcomponents/vant/dist/popup/index",
+			"van-button":"wxcomponents/vant/dist/button/index"
+		}
 	},
 	"tabBar": {
 		"color": "#333",

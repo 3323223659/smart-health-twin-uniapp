@@ -51,5 +51,8 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {
+    "van-popup": "wxcomponents/vant/dist/popup/index",
+    "van-button": "wxcomponents/vant/dist/button/index"
+  }
 }

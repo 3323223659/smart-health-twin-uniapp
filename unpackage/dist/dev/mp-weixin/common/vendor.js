@@ -9514,9 +9514,9 @@ internalMixin(Vue);
 
 /***/ }),
 /* 26 */
-/*!*************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/pages.json ***!
-  \*************************************************/
+/*!********************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/pages.json ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9660,9 +9660,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 33 */
-/*!***************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/uni.promisify.adaptor.js ***!
-  \***************************************************************/
+/*!**********************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/uni.promisify.adaptor.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9684,9 +9684,9 @@ uni.addInterceptor({
 
 /***/ }),
 /* 34 */
-/*!******************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/stores/index.js ***!
-  \******************************************************/
+/*!*************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/stores/index.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10970,9 +10970,9 @@ module.exports = index_cjs;
 
 /***/ }),
 /* 36 */
-/*!*************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/stores/modules/user.js ***!
-  \*************************************************************/
+/*!********************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/stores/modules/user.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10984,6 +10984,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var userModule = {
+  namespaced: true,
+  // 确保开启命名空间
   state: {
     userInfo: null // 用户信息
   },
@@ -11064,9 +11066,9 @@ exports.default = _default;
 /* 57 */,
 /* 58 */,
 /* 59 */
-/*!*********************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/lib/three.weapp.js ***!
-  \*********************************************************/
+/*!****************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/lib/three.weapp.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11078,9 +11080,9 @@ exports.default = _default;
 
 /***/ }),
 /* 60 */
-/*!***********************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/lib/OrbitControls.js ***!
-  \***********************************************************/
+/*!******************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/lib/OrbitControls.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11835,9 +11837,9 @@ MapControls.prototype.constructor = MapControls;
 
 /***/ }),
 /* 61 */
-/*!********************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health/lib/GLTFLoader.js ***!
-  \********************************************************/
+/*!***************************************************************!*\
+  !*** E:/WeChat/uni-app/smart-health-uniapp/lib/GLTFLoader.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

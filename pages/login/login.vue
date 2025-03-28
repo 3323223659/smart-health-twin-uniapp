@@ -133,7 +133,7 @@ export default {
     // 表单提交处理
     handleSubmit() {
       // 表单校验
-      if (!this.validateForm()) return;
+      //if (!this.validateForm()) return;
 
       if (this.isLogin) {
         this.login();
