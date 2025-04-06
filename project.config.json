@@ -1,0 +1,7 @@
+{
+  "miniprogramRoot": "pages",
+  "packNpmManually": true,
+  "packNpmRelationList": [
+    "node_modules/uni-ui"
+  ]
+}
