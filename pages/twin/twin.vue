@@ -13,10 +13,10 @@
 			</view>
 		</view>
 		
-		<!-- 数字人信息卡片 -->
+		<!-- 实时检测数据卡片 -->
 		<view class="info-section">
 			<view class="info-card">
-				<view class="card-title">数字人信息</view>
+				<view class="card-title">实时检测数据</view>
 				
 				<!-- 健康数据 -->
 				<view class="health-data">
@@ -28,6 +28,17 @@
 						<view class="health-value">
 							<text class="value-text">36.5</text>
 							<text class="unit-text">°C</text>
+						</view>
+					</view>
+					
+					<view class="health-item">
+						<view class="health-icon sport-icon">
+							<text class="icon-text">🚶</text>
+						</view>
+						<view class="health-name">步数</view>
+						<view class="health-value">
+							<text class="value-text">2341</text>
+							<text class="unit-text">步</text>
 						</view>
 					</view>
 					
@@ -44,11 +55,35 @@
 				</view>
 			</view>
 			
+			<!-- 风险预警卡片 -->
+			<view class="suggestion-card">
+				<view class="suggestion-title">
+					<view class="risk-icon">⚠️</view>
+					<text style="font-size: 30rpx">风险预警</text>
+					<view style="margin-left: 400rpx;font-size: 20rpx;color: #999;">
+						查看更多
+					</view>
+				</view>
+				
+				<view class="suggestion-item">
+					<view class="bullet">1</view>
+					<view class="suggestion-text">根据您的健康数据，血糖水平达到糖尿病预警阈值，请注意饮食健康。</view>
+				</view>
+				
+				<view class="suggestion-item">
+					<view class="bullet">2</view>
+					<view class="suggestion-text">您的心率持续高于100次/分钟，可能存在心动过速风险</view>
+				</view>
+			</view>
+			
 			<!-- 健康建议卡片 -->
 			<view class="suggestion-card">
 				<view class="suggestion-title">
 					<view class="suggestion-icon">💡</view>
-					<text>健康建议</text>
+					<text style="font-size: 30rpx">健康建议</text>
+					<view style="margin-left: 400rpx;font-size: 20rpx;color: #999;">
+						查看更多
+					</view>
 				</view>
 				
 				<view class="suggestion-item">
@@ -239,23 +274,19 @@
 </script>
 
 <style lang="scss">
-	page {
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-		background-color: #f5f7fa;
-	}
 
 	.page-container {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		background-color: #f5f7fa;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 0;
+	  height: 150rpx;
+	  background: linear-gradient(
+	    to bottom,
+	    #c1a8f0 0%,
+	    rgba(255, 255, 255, 1) 100% /* 纯白结束 */
+	  );
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  z-index: 0;
 	}
 
 	.navbar {
@@ -269,7 +300,7 @@
 	/* 3D模型展示区域 */
 	.model-area {
 		width: 100%;
-		height: 280px;
+		height: 450rpx;
 		background: rgba(230, 236, 245, 0.5);
 		margin-bottom: 20px;
 		display: flex;
@@ -321,23 +352,23 @@
 	
 	/* 信息卡片区域 */
 	.info-section {
-		padding: 0 16px;
+		padding: 0 16rpx;
 		flex: 1;
 	}
 	
 	.info-card {
 		background-color: #fff;
-		border-radius: 16px;
-		padding: 20px;
-		margin-bottom: 16px;
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+		border-radius: 16rpx;
+		padding: 20rpx;
+		margin-bottom: 16rpx;
+		box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
 	}
 	
 	.card-title {
-		font-size: 18px;
+		font-size: 18rpx;
 		font-weight: 600;
 		color: #333;
-		margin-bottom: 16px;
+		margin-bottom: 16rpx;
 	}
 	
 	/* 健康数据样式 */
@@ -349,26 +380,30 @@
 	.health-item {
 		width: 48%;
 		background: rgba(245, 247, 250, 0.8);
-		border-radius: 12px;
-		padding: 16px;
+		border-radius: 12rpx;
+		padding: 16rpx;
 	}
 	
 	.health-icon {
-		width: 50px;
-		height: 50px;
+		width: 50rpx;
+		height: 50rpx;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-bottom: 10px;
+		margin-bottom: 10rpx;
 	}
 	
 	.icon-text {
-		font-size: 24px;
+		font-size: 30rpx;
 	}
 	
 	.temp-icon {
 		background: linear-gradient(135deg, #FF9A9E 0%, #F6416C 100%);
+	}
+	
+	.sport-icon{
+		background: linear-gradient(135deg, #1CD3F3 0%, #6CC2D1 100%);
 	}
 	
 	.heart-icon {
@@ -376,9 +411,9 @@
 	}
 	
 	.health-name {
-		font-size: 14px;
+		font-size: 20rpx;
 		color: #666;
-		margin-bottom: 6px;
+		margin-bottom: 6rpx;
 	}
 	
 	.health-value {
@@ -387,53 +422,66 @@
 	}
 	
 	.value-text {
-		font-size: 24px;
+		font-size: 30rpx;
 		font-weight: 600;
 		color: #333;
 	}
 	
 	.unit-text {
-		font-size: 12px;
+		font-size: 20rpx;
 		color: #999;
-		margin-left: 4px;
-		margin-bottom: 4px;
+		margin-left: 4rpx;
+		margin-bottom: 4rpx;
 	}
 	
 	/* 健康建议卡片 */
 	.suggestion-card {
 		background-color: #fff;
-		border-radius: 16px;
-		padding: 20px;
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+		border-radius: 16rpx;
+		padding: 20rpx;
+		box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
 	}
 	
 	.suggestion-title {
 		display: flex;
 		align-items: center;
-		font-size: 18px;
+		font-size: 20rpx;
 		font-weight: 600;
 		color: #333;
-		margin-bottom: 16px;
+		margin-bottom: 16rpx;
+	}
+	
+	.risk-icon {
+		width: 50rpx;
+		height: 50rpx;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #B6202C 0%, #D54A6D 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		margin-right: 8rpx;
+		font-size: 30rpx;
 	}
 	
 	.suggestion-icon {
-		width: 30px;
-		height: 30px;
+		width: 50rpx;
+		height: 50rpx;
 		border-radius: 50%;
 		background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		color: white;
-		margin-right: 8px;
-		font-size: 16px;
+		margin-right: 8rpx;
+		font-size: 30rpx;
 	}
 	
 	.suggestion-item {
 		display: flex;
-		margin-bottom: 12px;
-		padding-bottom: 12px;
-		border-bottom: 1px solid #f0f0f0;
+		margin-bottom: 12rpx;
+		padding-bottom: 12rpx;
+		border-bottom: 1rpx solid #f0f0f0;
 	}
 	
 	.suggestion-item:last-child {
@@ -443,21 +491,21 @@
 	}
 	
 	.bullet {
-		width: 24px;
-		height: 24px;
+		width: 24rpx;
+		height: 24rpx;
 		border-radius: 50%;
 		background: rgba(106, 17, 203, 0.1);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 12px;
+		font-size: 20rpx;
 		color: #6a11cb;
-		margin-right: 12px;
+		margin-right: 12rpx;
 		flex-shrink: 0;
 	}
 	
 	.suggestion-text {
-		font-size: 14px;
+		font-size: 20rpx;
 		line-height: 1.6;
 		color: #666;
 		flex: 1;

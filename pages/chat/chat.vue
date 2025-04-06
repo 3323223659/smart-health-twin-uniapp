@@ -4,16 +4,20 @@
 		<view  class="navbar" :style="{ paddingTop: `${safeAreaInsets.top}px` }">
 			<view class="navbar-content">
 				<view class="navbar-left">
-					<text class="iconfont icon-menu">≡</text>
+					<uni-icons type="bars" color="#333" size="30" /> 
 				</view>
-				<view class="navbar-title">AI助手聊天</view>
-				<view class="navbar-right">
-					<text class="iconfont icon-comment">💬</text>
+				<view class="navbar-left">	
+					<image
+					  class="icon"
+					  src="../../static/icon/session.png"
+					  mode="scaleToFill"
+					/>
 				</view>
+				<view class="navbar-title">AIR小智</view>
 			</view>
 		</view>
 		
-		<view style="margin-top: 100rpx;">
+		<view style="">
 			<!-- 聊天内容区域 -->
 			<scroll-view  class="chat-container" scroll-y="true" 
 				:scroll-top="scrollTop" @scrolltolower="onScrollToLower" 
@@ -49,7 +53,7 @@
 				<textarea 
 					v-model="userInput" 
 					class="input" 
-					placeholder="询问小助手问题" 
+					placeholder="请输入询问内容" 
 					confirm-type="send"
 					:adjust-position="false"
 					:auto-height="true"
@@ -59,7 +63,7 @@
 					@confirm="sendMessage"
 				/>
 				<view class="send-btn" @click="sendMessage">
-					<text class="iconfont icon-send">📤</text>
+					<uni-icons type="paperplane" color="#1296DB" size="30" /> 
 				</view>
 			</view>
 			
@@ -87,6 +91,11 @@
 			};
 		},
 		onLoad() {
+			// 添加初始欢迎消息
+			this.chatHistory.push({
+				isUser: false,
+				text: "你好，我是您的健康助手小智，你可以询问我生活等方面的问题，我将结合你的身体信息进行回答。"
+			});
 			
 			// 监听键盘高度变化
 			uni.onKeyboardHeightChange(res => {
@@ -191,28 +200,27 @@
 </script>
 
 <style lang="scss">
-	page {
-		width: 100%;
-		height: 100%;
-		background-color: #f5f5f5;
-	}
 
 	.page-container {
-		height: 100vh;
-		display: flex;
-		flex-direction: column;
-		position: relative;
+	  height: 200rpx;
+	  background: linear-gradient(
+	    to bottom,
+	    #55ceec 0%,
+	    rgba(255, 255, 255, 1) 100% /* 纯白结束 */
+	  );
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  z-index: 0;
 	}
 
 	/* 顶部导航栏 */
 	.navbar {
-		background-color: #fff;
-		border-bottom: 1px solid #eee;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 100;
+		background-size: cover;
+		position: relative;
+		display: flex;
+		flex-direction: column;
 		
 		.navbar-content {
 			height: 100rpx;
@@ -220,10 +228,15 @@
 			align-items: center;
 			padding: 0 30rpx;
 			
-			.navbar-left, .navbar-right {
+			.navbar-left {
 				width: 60rpx;
 				display: flex;
 				justify-content: center;
+				
+				.icon {
+					width: 48rpx;
+					height: 48rpx;
+				}
 			}
 			
 			.navbar-title {
@@ -232,6 +245,7 @@
 				font-size: 32rpx;
 				font-weight: 500;
 				color: #333;
+				margin-right: 120rpx;
 			}
 		}
 	}
@@ -266,7 +280,7 @@
 
 	/* 消息项样式 */
 	.message-item {
-		margin-bottom: 40rpx;
+	  margin-bottom: 40rpx;
 	}
 
 	/* AI消息样式 */
@@ -279,9 +293,12 @@
 		}
 		
 		.ai-content {
-			background-color: #fff;
-			border-radius: 20rpx;
-			max-width: 70%;
+			margin-bottom: 40rpx;
+			  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2); /* 轻微阴影 */
+			  border-radius: 12rpx;
+			  padding: 20rpx;
+			  background: #fff; /* 确保背景是白色 */
+			max-width: 90%;
 		}
 	}
 
@@ -398,7 +415,7 @@
 			
 			.input {
 				flex: 1;
-				min-height: 80rpx;
+				min-height: 40rpx;
 				max-height: 240rpx;
 				font-size: 30rpx;
 				padding: 15rpx;
@@ -411,10 +428,14 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				border-radius: 50%;
-				background-color: #4a90e2;
 				color: #fff;
 				font-size: 40rpx;
+				
+				.icon {
+					width: 48rpx;
+					height: 48rpx;
+				}
+				
 			}
 		}
 		
