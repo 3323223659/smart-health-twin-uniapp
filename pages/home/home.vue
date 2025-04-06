@@ -4,7 +4,7 @@
 			<view class="navbar" :style="{ paddingTop: `${safeAreaInsets.top}px` }"></view>
 			<view class="content">
 				<view class="text-area">
-					<swiper class="swiper" style="height: 400rpx; margin-top: 70rpx;" :autoplay="true" :circular="true"
+					<swiper class="swiper" style="height: 400rpx" :autoplay="true" :circular="true"
 						:interval="3000" :duration="1000">
 						<swiper-item class="swiper-item" v-for="(item, index) in swiperList" :key="index">
 							<image class="swiper-image" :src="item.image" mode="aspectFill" />
@@ -13,21 +13,21 @@
 				</view>
 
 				<!-- 图标部分 -->
-				<view class="icon-container" style="margin-top: 150rpx;">
-					<view class="icon" @click="navigateTo('member')">
-						<image class="icon-image" src="../../static/image/hui.jpeg" />
+				<view class="icon-container" style="margin-top: 80rpx;">
+					<view class="icon" @click="handleTypeClick('member')">
+						<image class="icon-image" src="../../static/image/vip.jpg" />
 						<text class="icon-text">会员权益</text>
 					</view>
-					<view class="icon" @click="navigateTo('health')">
-						<image class="icon-image" src="../../static/image/health.png" />
+					<view class="icon" @click="handleTypeClick('health')">
+						<image class="icon-image" src="../../static/image/health.jpg" />
 						<text class="icon-text">健康中心</text>
 					</view>
-					<view class="icon" @click="navigateTo('wellness')">
+					<view class="icon" @click="handleTypeClick('wellness')">
 						<image class="icon-image" src="../../static/image/wellness.jpeg" />
 						<text class="icon-text">养生知识</text>
 					</view>
-					<view class="icon" @click="navigateTo('shopping')">
-						<image class="icon-image" src="../../static/image/shopping.jpeg" />
+					<view class="icon" @click="handleTypeClick('shopping')">
+						<image class="icon-image" src="../../static/image/shop.png" />
 						<text class="icon-text">购物中心</text>
 					</view>
 				</view>
@@ -45,9 +45,24 @@
 							<text class="card-desc">上传体检报告，AI智能分析健康风险</text>
 							<view class="card-btn">立即体检</view>
 						</view>
+						<view class="health-card blue-gradient" @click="handleServiceClick('数字人')">
+							<text class="card-title">3D孪生数字人</text>
+							<text class="card-desc">大模型分析健康风险提出建议</text>
+							<view class="card-btn">查看分析</view>
+						</view>
+						<view class="health-card orange-gradient" @click="handleServiceClick('导出报告')">
+							<text class="card-title">导出健康报告</text>
+							<text class="card-desc">导出您的健康报告</text>
+							<view class="card-btn">导出报告</view>
+						</view>
+						<view class="health-card green-gradient" @click="handleServiceClick('作息信息')">
+							<text class="card-title">构建作息信息</text>
+							<text class="card-desc">构建你的个性化作息时间信息供以分析</text>
+							<view class="card-btn">构建作息</view>
+						</view>
 						<view class="health-card pink-gradient" @click="handleServiceClick('健康打卡')">
 							<text class="card-title">每日健康打卡</text>
-							<text class="card-desc">记录您的健康数据</text>
+							<text class="card-desc">记录您的活跃信息</text>
 							<view class="card-btn">开始打卡</view>
 						</view>
 						<view class="health-card purple-gradient" @click="handleServiceClick('专家咨询')">
@@ -76,7 +91,7 @@
 				</view>
 				
 				<!-- 健康资讯部分 -->
-				<view class="section">
+				<view class="section" id="health-news">
 					<view class="section-header">
 						<text class="section-title">健康资讯</text>
 						<text class="section-more" @click="showMore('health-news')">更多 ></text>
@@ -91,7 +106,9 @@
 									<text class="news-reads">5678阅读</text>
 								</view>
 							</view>
-							<view class="news-image"></view>
+							<view class="news-image">
+								<image mode="aspectFill" style="width: 100%; height: 100%;" src="../../static/image/yiliao3.jpeg" />
+							</view>
 						</view>
 						
 						<view class="news-item" @click="handleNewsClick('夏季养生')">
@@ -102,7 +119,9 @@
 									<text class="news-reads">3456阅读</text>
 								</view>
 							</view>
-							<view class="news-image"></view>
+							<view class="news-image">
+								<image mode="aspectFill" style="width: 100%; height: 100%;" src="../../static/image/content2.jpg" />
+							</view>
 						</view>
 						
 						<view class="news-item" @click="handleNewsClick('营养推荐')">
@@ -113,7 +132,9 @@
 									<text class="news-reads">4321阅读</text>
 								</view>
 							</view>
-							<view class="news-image"></view>
+							<view class="news-image">
+								<image mode="aspectFill" style="width: 100%; height: 100%;" src="../../static/image/content3.jpg" />
+							</view>
 						</view>
 					</view>
 				</view>
@@ -152,43 +173,79 @@
 			};
 		},
 		methods: {
-			navigateTo(type) {
-				if (type === 'member') {
-					uni.navigateTo({
-						url: '/pages/member/member'
+			handleTypeClick(type) {
+				if (type === 'health') {
+					uni.switchTab({
+						url: '/pages/twin/twin'
 					});
-				} else if (type === 'shopping') {
-					uni.navigateTo({
-						url: '/pages/shopping/shopping'
-					});
-				} else {
+				}else if (type === 'wellness') {
+					uni.createSelectorQuery().select('#health-news').boundingClientRect(rect => {
+						uni.pageScrollTo({
+							duration: 300,
+							scrollTop: rect.top - 50 // 减去50是为了留出一些顶部空间
+						});
+					}).exec();
+				} else{
 					uni.showToast({
-						title: `跳转到${type}页面`,
+						title: `跳转到${type}页面，暂未实现`,
 						icon: 'none'
 					});
 				}
 			},
 			showMore(section) {
 				uni.showToast({
-					title: `查看${section}更多内容`,
+					title: `查看${section}更多内容，暂未实现`,
 					icon: 'none'
 				});
 			},
 			handleServiceClick(service) {
-				uni.showToast({
-					title: `您点击了${service}服务`,
-					icon: 'none'
-				});
+				if (service === '体检解读') {
+					uni.navigateTo({
+						url: '/pages/my/second/physical'
+					});
+				} else if (service === '健康打卡') {
+					uni.showToast({
+						title: '今日打卡成功!',
+						icon: 'none'
+					});
+				} else if (service === '专家咨询') {
+					uni.switchTab({
+						url: '/pages/chat/chat',
+					});
+				}else if (service === '数字人') {
+					uni.switchTab({
+						url: '/pages/twin/twin',
+					});
+				}else if (service === '导出报告') {
+					uni.navigateTo({
+						url: '/pages/my/second/upLoad',
+					});
+				}else if (service === '作息信息') {
+					uni.navigateTo({
+						url: '/pages/my/second/clock',
+					});
+				} else {
+					uni.showToast({
+						title: `您点击了${service}服务，暂未实现`,
+						icon: 'none'
+					});
+				}
 			},
 			handleToolClick(tool) {
-				uni.showToast({
-					title: `您启动了${tool}功能`,
-					icon: 'none'
-				});
+				if (tool === '运动记录' || tool === '心率监测') {
+					uni.switchTab({
+						url: '/pages/twin/twin'
+					});
+				}else{
+					uni.showToast({
+						title: `您启动了${tool}功能，暂未实现`,
+						icon: 'none'
+					});
+				}
 			},
 			handleNewsClick(news) {
 				uni.showToast({
-					title: `您正在阅读关于${news}的文章`,
+					title: `您正在阅读关于${news}的文章，暂未实现`,
 					icon: 'none'
 				});
 			}
@@ -198,20 +255,23 @@
 
 <style lang="scss">
 	.page-container {
-		width: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 0;
-		background: #f7f7f7;
+	  height: 100rpx;
+	  background: linear-gradient(
+	    to bottom,
+	    #165DFF 0%,
+	    /* 浅青色起始 */ rgba(255, 255, 255, 1) 100% /* 纯白结束 */
+	  );
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  z-index: 0;
 	}
 
 	.navbar {
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		padding-top: 20px;
 	}
 
 	.content {
@@ -317,6 +377,18 @@
 	
 	.teal-gradient {
 		background: linear-gradient(135deg, #43cea2, #185a9d);
+	}
+	
+	.blue-gradient {
+		background: linear-gradient(135deg, #1CD3F3, #6CC2D1);
+	}
+	
+	.orange-gradient {
+		background: linear-gradient(135deg, #CFA412, #E3EA7D);
+	}
+	
+	.green-gradient {
+		background: linear-gradient(135deg, #06F121, #68EE77);
 	}
 	
 	.pink-gradient {

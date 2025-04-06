@@ -2,5 +2,7 @@
   "navigationBarTitleText": "upLoad",
   "navigationStyle": "custom",
   "navigationBarTextStyle": "black",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-nav-bar": "/node-modules/@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar"
+  }
 }

@@ -1,5 +1,14 @@
 {
 
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			// uni-ui 规则如下配置
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
+
+
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/login/login",
@@ -24,9 +33,9 @@
 				"navigationBarTitleText": "孪生",
 				"navigationStyle": "custom", // 自定义导航栏
 				"navigationBarTextStyle": "black" // 导航栏字体颜色
-				
+
 			}
-			
+
 		},
 		{
 			"path": "pages/chat/chat",
@@ -101,7 +110,9 @@
 		"backgroundColor": "#F8F8F8",
 		"usingComponents": {
 			"van-popup": "wxcomponents/vant/dist/popup/index",
-			"van-button":"wxcomponents/vant/dist/button/index"
+			"van-button": "wxcomponents/vant/dist/button/index",
+			"van-field": "wxcomponents/vant/dist/field/index",
+			"van-icon": "wxcomponents/vant/dist/icon/index"
 		}
 	},
 	"tabBar": {

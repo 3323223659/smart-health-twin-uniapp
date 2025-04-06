@@ -53,6 +53,8 @@
   },
   "usingComponents": {
     "van-popup": "wxcomponents/vant/dist/popup/index",
-    "van-button": "wxcomponents/vant/dist/button/index"
+    "van-button": "wxcomponents/vant/dist/button/index",
+    "van-field": "wxcomponents/vant/dist/field/index",
+    "van-icon": "wxcomponents/vant/dist/icon/index"
   }
 }
