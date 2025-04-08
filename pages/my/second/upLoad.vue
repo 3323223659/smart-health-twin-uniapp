@@ -9,7 +9,7 @@
 	  
 	  <view class="box-bg">
 	    <uni-nav-bar shadow backgroundColor="#44cf9a" left-icon="left" @clickLeft="back">
-	      <view class="title-custom">导出报告</view>
+	      <view class="title-custom">导出报告(暂未实现)</view>
 	    </uni-nav-bar>
 	  </view>
 	  

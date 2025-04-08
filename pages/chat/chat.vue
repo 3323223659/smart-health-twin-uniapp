@@ -1,12 +1,12 @@
 <template>
 	<view class="page-container">
 		<!-- 顶部导航栏 -->
-		<view  class="navbar" :style="{ paddingTop: `${safeAreaInsets.top}px` }">
+		<view class="navbar" :style="{ paddingTop: `${safeAreaInsets.top}px` }">
 			<view class="navbar-content">
-				<view class="navbar-left">
+				<view class="navbar-left" @click="toggleSidebar">
 					<uni-icons type="bars" color="#333" size="30" /> 
 				</view>
-				<view class="navbar-left">	
+				<view class="navbar-left" @click="clearChat">	
 					<image
 					  class="icon"
 					  src="../../static/icon/session.png"
@@ -17,9 +17,18 @@
 			</view>
 		</view>
 		
+		<!-- 侧边栏 -->
+		<view class="sidebar" v-if="showSidebar" @click="toggleSidebar">
+			<view class="sidebar-content" @click.stop>
+				<view class="sidebar-item" @click="doSomething('2025-4-8-2')">对话2025-4-8-2</view>
+				<view class="sidebar-item" @click="doSomething('2025-4-8-1')">对话2025-4-8-1</view>
+				<view class="sidebar-item" @click="doSomething('2025-4-7-1')">对话2025-4-7-1</view>
+			</view>
+		</view>
+		
 		<view style="">
 			<!-- 聊天内容区域 -->
-			<scroll-view  class="chat-container" scroll-y="true" 
+			<scroll-view class="chat-container" scroll-y="true" 
 				:scroll-top="scrollTop" @scrolltolower="onScrollToLower" 
 				:style="{ paddingBottom: `${inputHeight}px` }">
 				<view class="chat-list">
@@ -66,141 +75,136 @@
 					<uni-icons type="paperplane" color="#1296DB" size="30" /> 
 				</view>
 			</view>
-			
 		</view>
 	</view>
 </template>
 
 <script>
-	import {
-		http
-	} from '../../utils/request';
-
+	import { chatAPI } from '@/api/system.js';
+	
 	export default {
-		data() {
-			return {
-				safeAreaInsets: uni.getSystemInfoSync().safeAreaInsets, // 适配安全区
-				userInput: '', // 用户输入的内容
-				chatHistory: [
-				
-				], // 聊天记录
-				scrollTop: 0, // 滚动位置
-				isLoading: false, // 是否正在加载AI回复
-				keyboardHeight: 0, // 键盘高度
-				inputHeight: 120 // 输入区域高度
-			};
-		},
-		onLoad() {
-			// 添加初始欢迎消息
-			this.chatHistory.push({
-				isUser: false,
-				text: "你好，我是您的健康助手小智，你可以询问我生活等方面的问题，我将结合你的身体信息进行回答。"
-			});
-			
-			// 监听键盘高度变化
-			uni.onKeyboardHeightChange(res => {
-				this.keyboardHeight = res.height;
-			});
-		},
-		methods: {
-			// 发送消息
-			async sendMessage() {
-				if (!this.userInput.trim()) return;
-
-				// 用户消息
-				this.chatHistory.push({
-					isUser: true,
-					text: this.userInput
-				});
-
-				// 保存输入内容，清空输入框
-				const userMessage = this.userInput;
-				this.userInput = '';
-				
-				// 滚动到底部
-				this.scrollToBottom();
-				
-				// 显示加载状态
-				this.isLoading = true;
-
-				try {
-					// 等待 AI 回复
-					const aiResponse = await this.getAIResponse(userMessage);
-
-					// 隐藏加载状态
-					this.isLoading = false;
-					
-					// AI 消息
-					this.chatHistory.push({
-						isUser: false,
-						text: aiResponse
-					});
-					
-					// 再次滚动到底部以显示新消息
-					this.$nextTick(() => {
-						this.scrollToBottom();
-					});
-
-				} catch (error) {
-					console.error("获取 AI 回复失败:", error);
-					this.isLoading = false;
-					this.chatHistory.push({
-						isUser: false,
-						text: "AI 回复失败，请稍后重试"
-					});
-					this.scrollToBottom();
-				}
-			},
-
-			// 发送请求获取 AI 回复
-			async getAIResponse(input) {
-				console.log("问题是：", input);
-				try {
-					const res = await http({
-						url: `/learn?message=${encodeURIComponent(input)}`,
-						method: 'GET',
-					});
-
-					console.log("获取的数据:", res);
-					return res; // 确保返回 AI 的文本内容
-				} catch (err) {
-					console.error("请求失败:", err);
-					return "错误！"; // 失败时返回 null
-				}
-			},
-			
-			// 滚动到底部
-			scrollToBottom() {
-				setTimeout(() => {
-					const query = uni.createSelectorQuery().in(this);
-					query.select('.chat-list').boundingClientRect(data => {
-						if (data) {
-							this.scrollTop = data.height;
-						}
-					}).exec();
-				}, 100);
-			},
-			
-			// 输入框获取焦点
-			onInputFocus() {
-				this.scrollToBottom();
-			},
-			
-			// 输入框失去焦点
-			onInputBlur() {
-				this.keyboardHeight = 0;
-			},
-			
-			// 滚动到底部事件
-			onScrollToLower() {
-				// 可以加载更多历史消息
-			}
-		}
+	  data() {
+	    return {
+	      safeAreaInsets: uni.getSystemInfoSync().safeAreaInsets,
+	      userInput: '',
+	      chatHistory: [],
+	      scrollTop: 0,
+	      isLoading: false,
+	      keyboardHeight: 0,
+	      inputHeight: 120,
+	      showSidebar: false,
+	      initialMessage: {
+	        isUser: false,
+	        text: "你好，我是您的健康助手小智，你可以询问我生活等方面的问题，我将结合你的身体信息进行回答。"
+	      }
+	    };
+	  },
+	  onLoad() {
+	    this.chatHistory.push(this.initialMessage);
+	    
+	    uni.onKeyboardHeightChange(res => {
+	      this.keyboardHeight = res.height;
+	    });
+	  },
+	  methods: {
+	    async sendMessage() {
+	      if (!this.userInput.trim()) {
+	        uni.showToast({ title: '请输入内容', icon: 'none' });
+	        return;
+	      }
+	
+	      // 保存用户消息
+	      const userMessage = this.userInput;
+	      this.chatHistory.push({
+	        isUser: true,
+	        text: userMessage
+	      });
+	      
+	      this.userInput = '';
+	      this.scrollToBottom();
+	      this.isLoading = true;
+	
+	      try {
+	        // 添加加载中消息
+	        const loadingIndex = this.chatHistory.push({
+	          isUser: false,
+	          text: "正在思考...",
+	          isLoading: true
+	        }) - 1;
+	
+	        // 调用API
+	        const {data} = await chatAPI({ message: userMessage });
+	        
+	        // 替换加载中消息为实际回复
+	        this.chatHistory[loadingIndex] = {
+	          isUser: false,
+	          text: data.value // 根据实际API返回结构调整
+	        };
+	        
+	      } catch (error) {
+	        console.error("AI回复失败:", error);
+	        this.chatHistory.push({
+	          isUser: false,
+	          text: "回复失败: " + (error.message || "请检查网络连接")
+	        });
+	        uni.showToast({ title: '请求失败', icon: 'none' });
+	      } finally {
+	        this.isLoading = false;
+	        this.$nextTick(this.scrollToBottom);
+	      }
+	    },
+	    
+	    // 清空聊天记录
+	    clearChat() {
+	      this.chatHistory = [this.initialMessage];
+	      uni.showToast({
+	        title: '新建对话',
+	        icon: 'none'
+	      });
+	    },
+	    
+	    // 切换侧边栏显示
+	    toggleSidebar() {
+	      this.showSidebar = !this.showSidebar;
+	    },
+	    
+	    // 侧边栏菜单项点击
+	    doSomething(action) {
+	      this.showSidebar = false;
+	      uni.showToast({
+	        title: `跳转到对话${action}`,
+	        icon: 'none'
+	      });
+	      // 这里可以添加具体的菜单项处理逻辑
+	    },
+	    
+	    scrollToBottom() {
+	      setTimeout(() => {
+	        const query = uni.createSelectorQuery().in(this);
+	        query.select('.chat-list').boundingClientRect(data => {
+	          if (data) {
+	            this.scrollTop = data.height;
+	          }
+	        }).exec();
+	      }, 100);
+	    },
+	    
+	    onInputFocus() {
+	      this.scrollToBottom();
+	    },
+	    
+	    onInputBlur() {
+	      this.keyboardHeight = 0;
+	    },
+	    
+	    onScrollToLower() {
+	      // 加载更多历史消息的逻辑
+	    }
+	  }
 	};
 </script>
 
 <style lang="scss">
-
 	.page-container {
 	  height: 200rpx;
 	  background: linear-gradient(
@@ -250,6 +254,36 @@
 		}
 	}
 
+	/* 侧边栏样式 */
+	.sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 100;
+		display: flex;
+		
+		.sidebar-content {
+			width: 60%;
+			height: 100%;
+			background-color: #fff;
+			padding-top: var(--status-bar-height);
+			box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+			
+			.sidebar-item {
+				padding: 30rpx;
+				font-size: 32rpx;
+				border-bottom: 1px solid #f5f5f5;
+				
+				&:active {
+					background-color: #f5f5f5;
+				}
+			}
+		}
+	}
+
 	/* 聊天区域 */
 	.chat-container {
 		flex: 1;
@@ -261,21 +295,6 @@
 	.chat-list {
 		width: 100%;
 		white-space: pre-wrap;
-	}
-
-	/* 欢迎消息样式 */
-	.welcome-container {
-		display: flex;
-		justify-content: center;
-		margin: 40rpx 0;
-		
-		.welcome-bubble {
-			background-color: #eef6ff;
-			padding: 20rpx 40rpx;
-			border-radius: 30rpx;
-			font-size: 28rpx;
-			color: #666;
-		}
 	}
 
 	/* 消息项样式 */
@@ -309,9 +328,12 @@
 		margin-bottom: 30rpx;
 		
 		.user-content {
-			background-color: #d9f0ff;
-			border-radius: 20rpx;
-			max-width: 70%;
+			margin-bottom: 40rpx;
+			  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2); /* 轻微阴影 */
+			  border-radius: 12rpx;
+			  padding: 20rpx;
+			  background: #55ceec; /* 确保背景是白色 */
+			max-width: 90%;
 		}
 	}
 
@@ -338,60 +360,6 @@
 			color: #333;
 			word-break: break-word;
 			line-height: 1.5;
-		}
-		
-		.message-actions {
-			display: flex;
-			margin-top: 20rpx;
-			
-			.action-btn {
-				font-size: 24rpx;
-				color: #999;
-				margin-right: 30rpx;
-			}
-		}
-	}
-
-	/* 加载中样式 */
-	.loading-message {
-		display: flex;
-		align-items: flex-start;
-		margin-bottom: 30rpx;
-		
-		.loading-dots {
-			display: flex;
-			align-items: center;
-			margin-left: 20rpx;
-			background-color: #fff;
-			padding: 20rpx;
-			border-radius: 20rpx;
-			
-			.dot {
-				width: 12rpx;
-				height: 12rpx;
-				background-color: #ccc;
-				border-radius: 50%;
-				margin: 0 6rpx;
-				display: inline-block;
-				animation: dot-flashing 1s infinite alternate;
-				
-				&:nth-child(2) {
-					animation-delay: 0.2s;
-				}
-				
-				&:nth-child(3) {
-					animation-delay: 0.4s;
-				}
-			}
-		}
-	}
-
-	@keyframes dot-flashing {
-		0% {
-			opacity: 0.3;
-		}
-		100% {
-			opacity: 1;
 		}
 	}
 
@@ -435,10 +403,7 @@
 					width: 48rpx;
 					height: 48rpx;
 				}
-				
 			}
 		}
-		
-	
 	}
 </style>

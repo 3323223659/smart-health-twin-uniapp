@@ -63,6 +63,32 @@
   color: #333;
   margin-right: 120rpx;
 }
+/* 侧边栏样式 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+}
+.sidebar .sidebar-content {
+  width: 60%;
+  height: 100%;
+  background-color: #fff;
+  padding-top: 25px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+.sidebar .sidebar-content .sidebar-item {
+  padding: 30rpx;
+  font-size: 32rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+.sidebar .sidebar-content .sidebar-item:active {
+  background-color: #f5f5f5;
+}
 /* 聊天区域 */
 .chat-container {
   flex: 1;
@@ -73,19 +99,6 @@
 .chat-list {
   width: 100%;
   white-space: pre-wrap;
-}
-/* 欢迎消息样式 */
-.welcome-container {
-  display: flex;
-  justify-content: center;
-  margin: 40rpx 0;
-}
-.welcome-container .welcome-bubble {
-  background-color: #eef6ff;
-  padding: 20rpx 40rpx;
-  border-radius: 30rpx;
-  font-size: 28rpx;
-  color: #666;
 }
 /* 消息项样式 */
 .message-item {
@@ -116,9 +129,14 @@
   margin-bottom: 30rpx;
 }
 .user-message .user-content {
-  background-color: #d9f0ff;
-  border-radius: 20rpx;
-  max-width: 70%;
+  margin-bottom: 40rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2);
+  /* 轻微阴影 */
+  border-radius: 12rpx;
+  padding: 20rpx;
+  background: #55ceec;
+  /* 确保背景是白色 */
+  max-width: 90%;
 }
 /* 头像样式 */
 .avatar {
@@ -141,63 +159,6 @@
   color: #333;
   word-break: break-word;
   line-height: 1.5;
-}
-.message-content .message-actions {
-  display: flex;
-  margin-top: 20rpx;
-}
-.message-content .message-actions .action-btn {
-  font-size: 24rpx;
-  color: #999;
-  margin-right: 30rpx;
-}
-/* 加载中样式 */
-.loading-message {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 30rpx;
-}
-.loading-message .loading-dots {
-  display: flex;
-  align-items: center;
-  margin-left: 20rpx;
-  background-color: #fff;
-  padding: 20rpx;
-  border-radius: 20rpx;
-}
-.loading-message .loading-dots .dot {
-  width: 12rpx;
-  height: 12rpx;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin: 0 6rpx;
-  display: inline-block;
-  -webkit-animation: dot-flashing 1s infinite alternate;
-          animation: dot-flashing 1s infinite alternate;
-}
-.loading-message .loading-dots .dot:nth-child(2) {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-}
-.loading-message .loading-dots .dot:nth-child(3) {
-  -webkit-animation-delay: 0.4s;
-          animation-delay: 0.4s;
-}
-@-webkit-keyframes dot-flashing {
-0% {
-    opacity: 0.3;
-}
-100% {
-    opacity: 1;
-}
-}
-@keyframes dot-flashing {
-0% {
-    opacity: 0.3;
-}
-100% {
-    opacity: 1;
-}
 }
 /* 底部输入区域 */
 .input-container {

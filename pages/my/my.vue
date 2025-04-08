@@ -6,8 +6,8 @@
 				<view class="avatar">
 					<image src="../../static/icon/avatar.png" mode="aspectFill" />
 				</view>
-				<view class="name">{{ userInfo ? userInfo.name : '未登录' }}</view>
-				<view class="address">来自于: {{ userInfo ? userInfo.address : '未知' }}</view>
+				<view class="name">{{ userInfo.name ? userInfo.name : '未命名用户' }}</view>
+				<view class="address">来自于: {{ userInfo.address ? userInfo.address : '未知' }}</view>
 			</view>
 			<view class="section">
 				<navigator url="/pages/my/second/userInfo">
@@ -45,7 +45,7 @@
 				</navigator>
 			</view>
 			<view class="section">
-				<navigator url="/pages/my/second/upLoad">
+				<!-- <navigator url="/pages/my/second/upLoad">
 					<view class="row">
 						<view class="left">
 							<uni-icons type="cloud-upload" color="#32CD32" size="24" /> 
@@ -55,7 +55,7 @@
 							<uni-icons type="right" size="24" />
 						</view>
 					</view>
-				</navigator>
+				</navigator> -->
 				<view class="row">
 				          <view class="left">
 				            <image
@@ -91,27 +91,31 @@
 </template>
 
 <script>
-	import {
-		mapState
-	} from 'vuex';
-
-	export default {
-		computed: {
-			...mapState('user', ['userInfo']),
-			safeAreaInsets() {
-				return uni.getSystemInfoSync().safeAreaInsets || {
-					top: 0
-				};
-			},
+import { getUserInfoAPI } from '@/api/user';
+export default {
+	data() {
+	  return {
+	    userInfo: {}
+	  };
+	},
+	computed: {
+		safeAreaInsets() {
+			return uni.getSystemInfoSync().safeAreaInsets || {
+				top: 0
+			};
 		},
-		methods: {
-			clickContact() {
-				uni.makePhoneCall({
-					phoneNumber: '99999999999'
-				});
-			},
+	},
+	methods: {
+		async getUserInfo() {
+			console.log(11)
+			const {data} = await getUserInfoAPI()
+			console.log(data)
 		},
-	};
+	},
+	mounted() {
+	    this.getUserInfo();
+	},
+};
 </script>
 
 

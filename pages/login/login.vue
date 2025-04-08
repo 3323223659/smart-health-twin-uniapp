@@ -47,7 +47,7 @@
           />
           <input 
             type="password"
-            v-model="formData.confirmPassword"
+            v-model="formData.re_password"
             placeholder="确认密码"
             placeholder-class="placeholder"
             maxlength="16"
@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import { loginAPI, registerAPI } from '@/api/user';
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
@@ -79,7 +81,7 @@ export default {
       formData: {
         phone: '',
         password: '',
-        confirmPassword: ''
+        re_password: ''
       }
     };
   },
@@ -94,6 +96,7 @@ export default {
     }
   },
   methods: {
+	...mapActions('user', ['setToken']), // 正确映射 Vuex action
     // 表单验证方法
     validateForm() {
       // 手机号验证
@@ -122,7 +125,7 @@ export default {
 
       // 注册时的确认密码验证
       if (!this.isLogin) {
-        if (this.formData.password !== this.formData.confirmPassword) {
+        if (this.formData.password !== this.formData.re_password) {
           uni.showToast({ title: '两次密码输入不一致', icon: 'none' });
           return false;
         }
@@ -150,16 +153,25 @@ export default {
       this.isLogin = !this.isLogin;
     },
     // 登录函数
-    login() {
-      uni.switchTab({
-        url: '/pages/home/home'
-      });
+    async login() {
+		const {data} = await loginAPI(this.formData)
+		if(data.value){			
+			uni.setStorageSync('token', data.value);
+			uni.switchTab({
+				url: '/pages/home/home'
+			});
+		}
     },
     // 注册函数
-    signup() {
-      uni.switchTab({
-        url: '/pages/home/home'
-      });
+    async signup() {
+		const {data} = await registerAPI(this.formData)
+		console.log(data)
+        if(data.message === 'success'){
+			uni.showToast({
+				title: '注册成功，请去登录',
+				icon: 'none'
+			});
+		}
     }
   }
 };

@@ -120,8 +120,8 @@
   padding: 16rpx;
 }
 .health-icon {
-  width: 50rpx;
-  height: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -129,7 +129,7 @@
   margin-bottom: 10rpx;
 }
 .icon-text {
-  font-size: 30rpx;
+  font-size: 40rpx;
 }
 .temp-icon {
   background: linear-gradient(135deg, #FF9A9E 0%, #F6416C 100%);
@@ -160,12 +160,33 @@
   margin-left: 4rpx;
   margin-bottom: 4rpx;
 }
-/* 健康建议卡片 */
+/* 修改卡片样式 */
 .suggestion-card {
   background-color: #fff;
   border-radius: 16rpx;
   padding: 20rpx;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  height: 260rpx;
+  /* 固定高度 */
+  display: flex;
+  flex-direction: column;
+}
+/* 滚动容器 */
+.scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  /* 允许垂直滚动 */
+  -webkit-overflow-scrolling: touch;
+  /* iOS平滑滚动 */
+}
+/* 调整内容项样式 */
+.suggestion-item {
+  display: flex;
+  margin-bottom: 12rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  min-height: 80rpx;
+  /* 最小高度保证可读性 */
 }
 .suggestion-title {
   display: flex;
@@ -199,12 +220,6 @@
   margin-right: 8rpx;
   font-size: 30rpx;
 }
-.suggestion-item {
-  display: flex;
-  margin-bottom: 12rpx;
-  padding-bottom: 12rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-}
 .suggestion-item:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -224,7 +239,7 @@
   flex-shrink: 0;
 }
 .suggestion-text {
-  font-size: 20rpx;
+  font-size: 30rpx;
   line-height: 1.6;
   color: #666;
   flex: 1;
