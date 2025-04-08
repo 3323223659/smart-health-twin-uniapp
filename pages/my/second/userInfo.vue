@@ -124,9 +124,7 @@
 </template>
 
 <script>
-import {
-  http
-} from '../../../utils/request';
+import {http} from '../../../utils/request';
 
 // 获取baseURL，用于文件上传
 const baseURL = 'http://localhost:8900';
