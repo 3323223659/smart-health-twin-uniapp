@@ -16,10 +16,10 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 27));
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
 __webpack_require__(/*! ./uni.promisify.adaptor */ 33);
 var _index = _interopRequireDefault(__webpack_require__(/*! ./stores/index.js */ 34));
+var _request = __webpack_require__(/*! @/utils/request */ 37);
 // @ts-ignore
 wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
-// 引入刚才创建的 Vuex store
-
+(0, _request.initRequestInterceptor)(_index.default);
 _vue.default.config.productionTip = false;
 _App.default.mpType = 'app';
 var app = new _vue.default({

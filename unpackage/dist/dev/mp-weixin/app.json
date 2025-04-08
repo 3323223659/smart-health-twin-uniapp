@@ -10,7 +10,8 @@
     "pages/my/second/clock",
     "pages/my/second/userInfo",
     "pages/my/second/upLoad",
-    "pages/my/second/physical"
+    "pages/my/second/physical",
+    "pages/home/second/Health-index"
   ],
   "subPackages": [],
   "window": {

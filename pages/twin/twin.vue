@@ -56,14 +56,13 @@
 			</view>
 			
 			<!-- 风险预警卡片 -->
-			<view class="suggestion-card">
+			<view @click="more" class="suggestion-card">
+				
 				<view class="suggestion-title">
-					<view class="risk-icon">⚠️</view>
-					<text style="font-size: 30rpx">风险预警</text>
-					<view style="margin-left: 400rpx;font-size: 20rpx;color: #999;">
-						查看更多
-					</view>
+						<view class="risk-icon">⚠️</view>
+						<text style="font-size: 30rpx">风险预警</text>
 				</view>
+				<view class="scroll-container">
 				
 				<view class="suggestion-item">
 					<view class="bullet">1</view>
@@ -74,18 +73,16 @@
 					<view class="bullet">2</view>
 					<view class="suggestion-text">您的心率持续高于100次/分钟，可能存在心动过速风险</view>
 				</view>
+				</view>
 			</view>
 			
 			<!-- 健康建议卡片 -->
-			<view class="suggestion-card">
+			<view @click="more" class="suggestion-card">
 				<view class="suggestion-title">
 					<view class="suggestion-icon">💡</view>
 					<text style="font-size: 30rpx">健康建议</text>
-					<view style="margin-left: 400rpx;font-size: 20rpx;color: #999;">
-						查看更多
-					</view>
 				</view>
-				
+				<view class="scroll-container">
 				<view class="suggestion-item">
 					<view class="bullet">1</view>
 					<view class="suggestion-text">根据您的健康数据，建议您在接下来一周内坚持每天至少30分钟的有氧运动，如快走或慢跑。</view>
@@ -94,6 +91,17 @@
 				<view class="suggestion-item">
 					<view class="bullet">2</view>
 					<view class="suggestion-text">您的睡眠质量良好，建议保持规律的作息时间，避免睡前使用电子设备。</view>
+				</view>
+				
+				<view class="suggestion-item">
+				      <view class="bullet">3</view>
+				      <view class="suggestion-text">建议增加每日饮水量，保持2000ml以上</view>
+				</view>
+				    
+				<view class="suggestion-item">
+				      <view class="bullet">4</view>
+				      <view class="suggestion-text">最近压力指数偏高，建议进行放松训练</view>
+				</view>
 				</view>
 			</view>
 		</view>
@@ -385,8 +393,8 @@
 	}
 	
 	.health-icon {
-		width: 50rpx;
-		height: 50rpx;
+		width: 60rpx;
+		height: 60rpx;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
@@ -395,7 +403,7 @@
 	}
 	
 	.icon-text {
-		font-size: 30rpx;
+		font-size: 40rpx;
 	}
 	
 	.temp-icon {
@@ -434,12 +442,31 @@
 		margin-bottom: 4rpx;
 	}
 	
-	/* 健康建议卡片 */
+	/* 修改卡片样式 */
 	.suggestion-card {
-		background-color: #fff;
-		border-radius: 16rpx;
-		padding: 20rpx;
-		box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+	  background-color: #fff;
+	  border-radius: 16rpx;
+	  padding: 20rpx;
+	  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+	  height: 260rpx; /* 固定高度 */
+	  display: flex;
+	  flex-direction: column;
+	}
+	
+	/* 滚动容器 */
+	.scroll-container {
+	  flex: 1;
+	  overflow-y: auto; /* 允许垂直滚动 */
+	  -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+	}
+	
+	/* 调整内容项样式 */
+	.suggestion-item {
+	  display: flex;
+	  margin-bottom: 12rpx;
+	  padding-bottom: 12rpx;
+	  border-bottom: 1rpx solid #f0f0f0;
+	  min-height: 80rpx; /* 最小高度保证可读性 */
 	}
 	
 	.suggestion-title {
@@ -477,13 +504,6 @@
 		font-size: 30rpx;
 	}
 	
-	.suggestion-item {
-		display: flex;
-		margin-bottom: 12rpx;
-		padding-bottom: 12rpx;
-		border-bottom: 1rpx solid #f0f0f0;
-	}
-	
 	.suggestion-item:last-child {
 		margin-bottom: 0;
 		padding-bottom: 0;
@@ -505,7 +525,7 @@
 	}
 	
 	.suggestion-text {
-		font-size: 20rpx;
+		font-size: 30rpx;
 		line-height: 1.6;
 		color: #666;
 		flex: 1;

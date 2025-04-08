@@ -1,0 +1,168 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  width: 100%;
+  height: 100%;
+  /* 移除 overflow: hidden */
+  background-color: #f8f8f8;
+}
+.page-container {
+  min-height: 100%;
+  /* 改为 min-height */
+  background: linear-gradient(to bottom, #c1a8f0 0%, white 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  /* 添加 padding-bottom 确保内容可以滚动 */
+  padding-bottom: 40rpx;
+}
+/* 自定义导航条 */
+.navbar {
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+/* 自定义标题样式 */
+.title-custom {
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  position: relative;
+  z-index: 1;
+  /* 确保内容可以扩展 */
+  min-height: 100vh;
+}
+/* 健康指数卡片 */
+.health-card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+  margin: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.health-card .health-score {
+  font-size: 72rpx;
+  font-weight: bold;
+  color: #7c6ce6;
+  margin-bottom: 10rpx;
+}
+.health-card .health-label {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+}
+.health-card .health-trend {
+  font-size: 26rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 40rpx;
+}
+.health-card .health-trend.up {
+  color: #52c41a;
+  background-color: rgba(82, 196, 26, 0.1);
+}
+.health-card .health-trend.down {
+  color: #f5222d;
+  background-color: rgba(245, 34, 45, 0.1);
+}
+.health-card .health-trend.stable {
+  color: #faad14;
+  background-color: rgba(250, 173, 20, 0.1);
+}
+.health-card .health-trend .trend-arrow {
+  margin-left: 6rpx;
+}
+/* 指标卡片 */
+.indicator-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20rpx;
+  margin: 0 10rpx;
+}
+.indicator-card {
+  width: 48%;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+.indicator-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+}
+.indicator-card.good::before {
+  background-color: #52c41a;
+}
+.indicator-card.normal::before {
+  background-color: #1890ff;
+}
+.indicator-card.bad::before {
+  background-color: #f5222d;
+}
+.indicator-card .indicator-value {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #7c6ce6;
+  margin-bottom: 10rpx;
+}
+.indicator-card .indicator-name {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 6rpx;
+}
+.indicator-card .indicator-unit {
+  font-size: 24rpx;
+  color: #999;
+}

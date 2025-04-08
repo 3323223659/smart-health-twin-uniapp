@@ -55,11 +55,11 @@
 							<text class="card-desc">导出您的健康报告</text>
 							<view class="card-btn">导出报告</view>
 						</view>
-						<view class="health-card green-gradient" @click="handleServiceClick('作息信息')">
+<!-- 						<view class="health-card green-gradient" @click="handleServiceClick('作息信息')">
 							<text class="card-title">构建作息信息</text>
 							<text class="card-desc">构建你的个性化作息时间信息供以分析</text>
 							<view class="card-btn">构建作息</view>
-						</view>
+						</view> -->
 						<view class="health-card pink-gradient" @click="handleServiceClick('健康打卡')">
 							<text class="card-title">每日健康打卡</text>
 							<text class="card-desc">记录您的活跃信息</text>
@@ -162,7 +162,7 @@
 				},
 				healthTools: [
 					{ name: '用药提醒', icon: '💊', bgClass: 'bg-blue' },
-					{ name: '健康指数', icon: '📈', bgClass: 'bg-green' },
+					{ name: '健康检测', icon: '📈', bgClass: 'bg-green' },
 					{ name: '膳食计划', icon: '🥗', bgClass: 'bg-orange' },
 					{ name: '喝水提醒', icon: '💧', bgClass: 'bg-purple' },
 					{ name: '运动记录', icon: '🏃', bgClass: 'bg-blue' },
@@ -216,10 +216,6 @@
 					uni.switchTab({
 						url: '/pages/twin/twin',
 					});
-				}else if (service === '导出报告') {
-					uni.navigateTo({
-						url: '/pages/my/second/upLoad',
-					});
 				}else if (service === '作息信息') {
 					uni.navigateTo({
 						url: '/pages/my/second/clock',
@@ -235,6 +231,10 @@
 				if (tool === '运动记录' || tool === '心率监测') {
 					uni.switchTab({
 						url: '/pages/twin/twin'
+					});
+				}else if (tool === '健康检测') {
+					uni.navigateTo({
+						url: '/pages/home/second/Health-index'
 					});
 				}else{
 					uni.showToast({

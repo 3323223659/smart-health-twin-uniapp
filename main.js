@@ -4,6 +4,9 @@ import App from './App'
 import Vue from 'vue'
 import './uni.promisify.adaptor'
 import store from './stores/index.js'  // 引入刚才创建的 Vuex store
+// 请求拦截器
+import { initRequestInterceptor } from '@/utils/request'
+initRequestInterceptor(store)
 
 Vue.config.productionTip = false
 

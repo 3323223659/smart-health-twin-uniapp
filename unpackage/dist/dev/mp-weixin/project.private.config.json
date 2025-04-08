@@ -4,15 +4,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/chat/chat",
+          "name": "pages/home/home",
           "pathName": "pages/home/home",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/twin/twin",
-          "pathName": "pages/twin/twin",
           "query": "",
           "launchMode": "default",
           "scene": null
