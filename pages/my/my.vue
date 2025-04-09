@@ -6,8 +6,8 @@
 				<view class="avatar">
 					<image src="../../static/icon/avatar.png" mode="aspectFill" />
 				</view>
-				<view class="name">{{ userInfo.name ? userInfo.name : '未命名用户' }}</view>
-				<view class="address">来自于: {{ userInfo.address ? userInfo.address : '未知' }}</view>
+				<view class="name">{{ userInfo.username ? userInfo.username : '未命名用户' }}</view>
+				<view class="address">来自于: {{ userInfo.city ? userInfo.city : '未知' }}</view>
 			</view>
 			<view class="section">
 				<navigator url="/pages/my/second/userInfo">
@@ -109,7 +109,8 @@ export default {
 		async getUserInfo() {
 			console.log(11)
 			const {data} = await getUserInfoAPI()
-			console.log(data)
+			this.userInfo=data
+			console.log("后端数据",data)
 		},
 	},
 	mounted() {

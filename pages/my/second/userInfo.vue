@@ -54,9 +54,9 @@
               <text>性别</text>
             </view>
             <view class="info-value">
-              <text v-if="!isEditMode" class="display-value">{{ userInfo.gender }}</text>
+              <text v-if="!isEditMode" class="display-value">{{ userInfo.gender === 1 ? "男": "女" }}</text>
               <picker v-else mode="selector" :range="genderOptions" @change="handleGenderChange">
-                <view class="picker-value">{{ userInfo.gender }}</view>
+                <view class="picker-value">{{ userInfo.gender === 1 ? "男": "女" }}</view>
               </picker>
             </view>
           </view>
@@ -102,7 +102,7 @@
               <text>健康状态</text>
             </view>
             <view class="info-value">
-              <text class="display-value">{{ userInfo.healthStatus }}</text>
+              <text class="display-value">{{ userInfo.healthStatus === 1 ? "健康" :"生病" }}</text>
             </view>
           </view>
         </view>
@@ -124,10 +124,11 @@
 </template>
 
 <script>
-import {http} from '../../../utils/request';
+import {http} from '@/utils/request';
+import { getUserInfoAPI } from '@/api/user';
 
 // 获取baseURL，用于文件上传
-const baseURL = 'http://localhost:8900';
+const baseURL = 'http://localhost:8080';
 
 export default {
   data() {
@@ -140,14 +141,14 @@ export default {
       userInfo: {
         userId: '1024888',
         username: '张小明',
-        gender: '男',
+        gender: 1,
         age: '28',
         city: '上海',
         healthStatus: '良好',
         avatar: '../../../static/image/avatar.png'
       },
       // 性别选项
-      genderOptions: ['男', '女', '保密'],
+      genderOptions: ['女', '男', '保密'],
       // 编辑前的备份数据
       backupUserInfo: null,
       // 选择的头像文件
@@ -165,6 +166,7 @@ export default {
       }
     };
   },
+ 
   methods: {
     // 返回上一页
     handleBack() {
@@ -242,13 +244,13 @@ export default {
       });
 
       // 构建要发送的用户数据
-      const userData = {
+      let userData = {
         userId: this.userInfo.userId,
         username: this.userInfo.username,
         gender: this.userInfo.gender,
         age: this.userInfo.age,
-        city: this.userInfo.city
-        // 健康状态不可编辑，不需要提交
+        city: this.userInfo.city,
+        avatar: this.userInfo.avatar
       };
 
       // 如果有选择新头像，先上传头像文件
@@ -263,18 +265,21 @@ export default {
     // 上传头像到服务器
     uploadAvatar(filePath, userData) {
       uni.uploadFile({
-        url: baseURL + '/uploadAvatar', // 头像上传API
+        url: baseURL + '/sht/user/file', // 头像上传API
         filePath: filePath,
-        name: 'avatar',
+        name: 'file',
         formData: {
           userId: this.userInfo.userId
         },
         success: (uploadRes) => {
           try {
-            const result = JSON.parse(uploadRes.data);
-            if (result.code === 200) {
+			
+			const resData = JSON.parse(uploadRes.data)
+			console.log("文件上传成功信息",resData)
+            if (resData.code===200) {
               // 上传成功，将头像URL添加到用户数据中
-              userData.avatar = result.data.fileUrl;
+              userData.avatar = resData.data.value
+			  console.log("头像信息：",userData.avatar)
               // 保存用户信息到服务器
               this.submitUserInfo(userData);
             } else {
@@ -293,7 +298,7 @@ export default {
     // 提交用户信息到后端
     submitUserInfo(userData) {
       http({
-        url: '/saveUser',
+        url: '/sht/user/info',
         method: 'POST',
         data: userData
       }).then(res => {
@@ -334,8 +339,9 @@ export default {
 
     // 性别选择器变更
     handleGenderChange(e) {
+		console.log("性别是：",e)
       const index = e.detail.value;
-      this.userInfo.gender = this.genderOptions[index];
+      this.userInfo.gender =index
     },
 
     // 城市选择器变更
@@ -364,7 +370,7 @@ export default {
     // 获取用户信息
     getUserInfo() {
       http({
-        url: '/getUserInfo',
+        url: '/sht/user/info',
         method: 'GET'
       }).then(res => {
         if (res.code === 200) {
