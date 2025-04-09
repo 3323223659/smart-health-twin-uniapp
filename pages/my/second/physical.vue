@@ -33,6 +33,7 @@
 
 <script>
 import { uploadAPI } from '@/api/system';
+import { uploadHealthReport, getHealthReport } from '@/api/user';
 
 export default {
   data() {
@@ -40,11 +41,14 @@ export default {
       // 获取系统安全区域信息
       safeAreaInsets: uni.getSystemInfoSync().safeAreaInsets,
       imageUrl: '', // 图片临时路径
-      uploadStatus: '' // 上传状态提示
+      uploadStatus: '' ,// 上传状态提示
+	  HealthReporData:{
+		  filePath:''
+	  }
     };
   },
   mounted() {
-   
+	  this.initHealthReport()
   },
   methods: {
     // 返回上一页
@@ -53,7 +57,11 @@ export default {
         url: "/pages/my/my"
       });
     },
-    
+    async initHealthReport(){
+    	const { data } = await getHealthReport()
+    	this.imageUrl = data.photoPath
+
+    },
     // 选择图片
     chooseImage() {
       uni.chooseImage({
@@ -94,17 +102,16 @@ export default {
         });
         
         // 调用上传API
-        const res = await uploadAPI(this.imageUrl);
-        
+        const {data} = await uploadAPI(this.imageUrl);
+		console.log(data.value)
+		this.HealthReporData.filePath = data.value
+        await uploadHealthReport(this.HealthReporData)
         // 上传成功处理
         this.uploadStatus = '上传成功';
         uni.showToast({
           title: '上传成功',
           icon: 'success'
         });
-        
-        // 这里可以根据业务需求处理返回结果
-        console.log('上传结果:', res);
         
       } catch (error) {
         console.error('上传失败:', error);

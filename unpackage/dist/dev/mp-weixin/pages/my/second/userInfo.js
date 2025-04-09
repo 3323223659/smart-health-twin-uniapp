@@ -101,7 +101,10 @@ var components
 try {
   components = {
     uniNavBar: function () {
-      return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar.vue */ 330))
+      return __webpack_require__.e(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar.vue */ 150))
+    },
+    uniIcons: function () {
+      return Promise.all(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons.vue */ 142))
     },
   }
 } catch (e) {
@@ -160,10 +163,118 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _user = __webpack_require__(/*! @/api/user */ 47);
+var _system = __webpack_require__(/*! @/api/system */ 75);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -189,19 +300,303 @@ var _default = {
   data: function data() {
     return {
       // 获取系统安全区域信息
-      safeAreaInsets: uni.getSystemInfoSync().safeAreaInsets
+      safeAreaInsets: uni.getSystemInfoSync().safeAreaInsets,
+      // 是否处于编辑模式
+      isEditMode: false,
+      // 用户信息
+      userInfo: {
+        gender: 1,
+        age: '20',
+        city: '未知',
+        healthStatus: '',
+        avatar: '../../../static/image/avatar.png'
+      },
+      // 性别选项
+      genderOptions: ['女', '男', '保密'],
+      // 编辑前的备份数据
+      avatar: null,
+      // 选择的头像文件
+      selectedFile: null,
+      // 文件选择器样式配置
+      imageStyles: {
+        width: 120,
+        height: 120,
+        border: {
+          color: '#44cf9a',
+          width: 2,
+          style: 'dashed',
+          radius: '5px'
+        }
+      }
     };
   },
   methods: {
-    // 返回上一页
-    back: function back() {
-      uni.switchTab({
-        url: "/pages/my/my"
+    // 选择图片
+    chooseImage: function chooseImage() {
+      var _this = this;
+      uni.chooseImage({
+        count: 1,
+        // 默认9
+        sizeType: ['compressed'],
+        // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'],
+        // 可以指定来源是相册还是相机，默认二者都有
+        success: function success(res) {
+          // 获取图片临时路径
+          _this.avatar = res.tempFilePaths[0];
+          _this.uploadStatus = '';
+        },
+        fail: function fail(err) {
+          console.error('选择图片失败:', err);
+          uni.showToast({
+            title: '选择图片失败',
+            icon: 'none'
+          });
+        }
       });
+    },
+    // 返回上一页
+    handleBack: function handleBack() {
+      var _this2 = this;
+      if (this.isEditMode) {
+        uni.showModal({
+          title: '提示',
+          content: '确定要放弃编辑吗？',
+          success: function success(res) {
+            if (res.confirm) {
+              _this2.cancelEdit();
+              uni.switchTab({
+                url: "/pages/my/my"
+              });
+            }
+          }
+        });
+      } else {
+        uni.switchTab({
+          url: "/pages/my/my"
+        });
+      }
+    },
+    // 切换编辑模式
+    toggleEditMode: function toggleEditMode() {
+      if (this.isEditMode) {
+        // 取消编辑，恢复数据
+        this.cancelEdit();
+      } else {
+        // 进入编辑模式，先备份数据
+        this.backupUserInfo = JSON.parse(JSON.stringify(this.userInfo));
+        this.isEditMode = true;
+      }
+    },
+    // 取消编辑
+    cancelEdit: function cancelEdit() {
+      // 恢复备份的数据
+      if (this.backupUserInfo) {
+        this.userInfo = JSON.parse(JSON.stringify(this.backupUserInfo));
+      }
+      this.isEditMode = false;
+      this.selectedFile = null;
+
+      // 重置文件选择器
+      if (this.$refs.filePicker) {
+        this.$refs.filePicker.clearFiles();
+      }
+    },
+    // 处理文件选择事件
+    handleFileSelect: function handleFileSelect(e) {
+      this.selectedFile = e.tempFiles[0];
+    },
+    // 处理文件删除事件
+    handleFileDelete: function handleFileDelete() {
+      this.selectedFile = null;
+    },
+    // 保存更改到后端
+    saveChanges: function saveChanges() {
+      // 数据验证
+      if (!this.userInfo.username.trim()) {
+        uni.showToast({
+          title: '姓名不能为空',
+          icon: 'none'
+        });
+        return;
+      }
+
+      // 显示加载
+      uni.showLoading({
+        title: '保存中...'
+      });
+
+      // 构建要发送的用户数据
+      var userData = {
+        userId: this.userInfo.userId,
+        username: this.userInfo.username,
+        gender: this.userInfo.gender,
+        age: this.userInfo.age,
+        city: this.userInfo.city,
+        avatar: this.userInfo.avatar
+      };
+
+      // 如果有选择新头像，先上传头像文件
+      if (this.avatar) {
+        this.uploadAvatar(this.avatar, userData);
+      } else {
+        // 没有新头像，直接保存用户信息
+        this.submitUserInfo(userData);
+      }
+    },
+    // 上传头像到服务器
+    uploadAvatar: function uploadAvatar(filePath, userData) {
+      var _this3 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var resData;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                uni.showLoading({
+                  title: '上传中',
+                  mask: true
+                });
+
+                // 调用上传API
+                _context.next = 4;
+                return (0, _system.uploadAPI)(_this3.avatar);
+              case 4:
+                resData = _context.sent;
+                // 上传成功处理
+                _this3.uploadStatus = '上传成功';
+                uni.showToast({
+                  title: '上传成功',
+                  icon: 'success'
+                });
+                userData.avatar = resData.data.value;
+                console.log("头像信息：", userData.avatar);
+                // 保存用户信息到服务器
+                _this3.submitUserInfo(userData);
+                _context.next = 17;
+                break;
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](0);
+                console.error('上传失败:', _context.t0);
+                _this3.uploadStatus = '上传失败';
+                uni.showToast({
+                  title: '上传失败',
+                  icon: 'none'
+                });
+              case 17:
+                _context.prev = 17;
+                uni.hideLoading();
+                return _context.finish(17);
+              case 20:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 12, 17, 20]]);
+      }))();
+    },
+    // 提交用户信息到后端
+    submitUserInfo: function submitUserInfo(userData) {
+      var _this4 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return (0, _user.updateUserInfoAPI)(userData);
+              case 2:
+                uni.showToast({
+                  title: '个人信息保存成功',
+                  icon: 'success'
+                });
+
+                // 将新头像更新到用户信息中
+                if (_this4.selectedFile && userData.avatar) {
+                  _this4.userInfo.avatar = userData.avatar;
+                }
+
+                // 更新备份数据
+                _this4.backupUserInfo = JSON.parse(JSON.stringify(_this4.userInfo));
+                _this4.isEditMode = false;
+                _this4.selectedFile = null;
+
+                // 重置文件选择器
+                if (_this4.$refs.filePicker) {
+                  _this4.$refs.filePicker.clearFiles();
+                }
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    // 处理错误
+    handleError: function handleError(message) {
+      uni.hideLoading();
+      uni.showToast({
+        title: message,
+        icon: 'none'
+      });
+    },
+    // 性别选择器变更
+    handleGenderChange: function handleGenderChange(e) {
+      console.log("性别是：", e);
+      var index = e.detail.value;
+      this.userInfo.gender = index;
+    },
+    // 城市选择器变更
+    handleCityChange: function handleCityChange(e) {
+      var cityArray = e.detail.value;
+      // 省市区，只取市级
+      this.userInfo.city = cityArray[1];
+    },
+    // 年龄增加
+    incrementAge: function incrementAge() {
+      var currentAge = parseInt(this.userInfo.age);
+      if (currentAge < 120) {
+        // 设置最大年龄限制
+        this.userInfo.age = (currentAge + 1).toString();
+      }
+    },
+    // 年龄减少
+    decrementAge: function decrementAge() {
+      var currentAge = parseInt(this.userInfo.age);
+      if (currentAge > 1) {
+        // 设置最小年龄限制
+        this.userInfo.age = (currentAge - 1).toString();
+      }
+    },
+    getUserInfo: function getUserInfo() {
+      var _this5 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var _yield$getUserInfoAPI, data;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return (0, _user.getUserInfoAPI)();
+              case 2:
+                _yield$getUserInfoAPI = _context3.sent;
+                data = _yield$getUserInfoAPI.data;
+                _this5.userInfo = data;
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   },
-  mounted: function mounted() {
-    // 组件挂载完成时的生命周期钩子
+  onLoad: function onLoad() {
+    // 页面加载时从服务器获取用户信息
+    this.getUserInfo();
   }
 };
 exports.default = _default;

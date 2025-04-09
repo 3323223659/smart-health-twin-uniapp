@@ -27,16 +27,19 @@
 page {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  background-color: #f7f8fa;
 }
-/* 自定义导航条 */
-.navbar {
-  background-color: #44cf9a;
-  background-size: cover;
-  position: relative;
+.container {
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  min-height: 100%;
+  width: 100%;
+}
+/* 自定义导航条 */
+.box-bg {
+  background-color: #44cf9a;
+  position: relative;
+  width: 100%;
 }
 /* 自定义标题样式 */
 .title-custom {
@@ -46,19 +49,205 @@ page {
   /* 居中显示 */
   font-size: 16px;
   /* 字体大小 */
+  font-weight: 600;
   flex: 1;
   /* 占据剩余空间 */
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.save-nav-btn {
+  font-size: 14px;
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+/* 主内容区 */
 .content {
+  flex: 1;
+  padding: 20px 16px;
+}
+/* 个人信息卡片 */
+.info-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+/* 头像区域 */
+.avatar-section {
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  background-color: #f0f9ff;
 }
-.text-area {
+.avatar-wrapper {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.15);
+  margin-bottom: 12px;
+  position: relative;
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* 头像上传容器 - 极简版本 */
+.avatar-upload-container {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ddd;
+  /* 浅灰色边框 */
   display: flex;
   justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* 确保图片不溢出 */
+  background-color: #f5f5f5;
+  /* 浅灰色背景 */
+  /* 图片样式 - 等比例填充 */
+  /* 加号图标样式 */
+}
+.avatar-upload-container image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 关键属性：等比例填充容器 */
+}
+.avatar-upload-container .uni-icons {
+  color: #999;
+  /* 灰色图标 */
+}
+.username {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.user-id {
+  font-size: 13px;
+  color: #64748b;
+}
+/* 信息项 */
+.info-list {
+  padding: 8px 0;
+}
+.info-item {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f5f9;
+}
+.info-item:last-child {
+  border-bottom: none;
+}
+.info-label {
+  font-size: 16px;
+  color: #334155;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.info-label .uni-icons,
+.info-label van-icon {
+  margin-right: 8px;
+}
+.info-value {
+  font-size: 16px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+}
+.info-value input {
+  text-align: right;
+  height: 24px;
+  min-height: 24px;
+  line-height: 24px;
+  color: #64748b;
+}
+.picker-value {
+  color: #64748b;
+}
+/* 数字步进器 */
+.number-stepper {
+  display: flex;
+  align-items: center;
+}
+.stepper-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.stepper-value {
+  margin: 0 12px;
+  font-size: 16px;
+  color: #64748b;
+  min-width: 30px;
+  text-align: center;
+}
+/* 编辑按钮 */
+.edit-btn {
+  background: #44cf9a;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(68, 207, 154, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.edit-btn .uni-icons {
+  margin-right: 8px;
+}
+.cancel-btn {
+  background: #ef4444;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+/* 保存按钮 */
+.save-button {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 16px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.save-button .uni-icons {
+  margin-right: 8px;
+}
+/* 自定义uni-file-picker组件样式 */
+:deep(.uni-file-picker__container) {
+  display: flex;
+  justify-content: center;
+}
+:deep(.uni-file-picker__list) {
+  margin-top: 0;
+  margin-bottom: 0;
 }

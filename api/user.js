@@ -31,7 +31,26 @@ export const updateUserInfoAPI = (data) => {
   return http({
     url: '/sht/user/info',
     method: 'POST',
-    data,
+    data
   });
 };
+
+//ocr
+export const uploadHealthReport = (data) => {
+  return http({
+    url: '/sht/user/healthReportUpload',
+    method: 'POST',
+    data
+  });
+};
+
+//获取健康信息
+export const getHealthReport = () => {
+  return http({
+    url: '/sht/user/healthReport',
+    method: 'GET',
+    
+  });
+};
+
 

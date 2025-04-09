@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons.vue */ 322))
+      return Promise.all(/*! import() | node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons.vue */ 142))
     },
   }
 } catch (e) {
@@ -260,6 +260,7 @@ var _user = __webpack_require__(/*! @/api/user */ 47);
 //
 //
 //
+//
 var _default = {
   data: function data() {
     return {
@@ -275,20 +276,20 @@ var _default = {
   },
   methods: {
     getUserInfo: function getUserInfo() {
+      var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         var _yield$getUserInfoAPI, data;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(11);
-                _context.next = 3;
+                _context.next = 2;
                 return (0, _user.getUserInfoAPI)();
-              case 3:
+              case 2:
                 _yield$getUserInfoAPI = _context.sent;
                 data = _yield$getUserInfoAPI.data;
-                console.log(data);
-              case 6:
+                _this.userInfo = data;
+              case 5:
               case "end":
                 return _context.stop();
             }

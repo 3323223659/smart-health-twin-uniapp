@@ -56,7 +56,7 @@
 			</view>
 			
 			<!-- 风险预警卡片 -->
-			<view @click="more" class="suggestion-card">
+			<view class="suggestion-card">
 				
 				<view class="suggestion-title">
 						<view class="risk-icon">⚠️</view>
@@ -77,7 +77,7 @@
 			</view>
 			
 			<!-- 健康建议卡片 -->
-			<view @click="more" class="suggestion-card">
+			<view class="suggestion-card">
 				<view class="suggestion-title">
 					<view class="suggestion-icon">💡</view>
 					<text style="font-size: 30rpx">健康建议</text>
@@ -114,6 +114,7 @@
 		OrbitControls
 	} from '../../lib/OrbitControls.js'
 	import GLTF from '../../lib/GLTFLoader.js'
+	import { getHealthReport } from '@/api/user';
 
 	export default {
 		data() {
@@ -136,6 +137,7 @@
 		},
 		// 页面加载时
 		onLoad(option) {
+			this.getAdvice()
 			// 获取手机屏幕宽高
 			this.mSceneWidth = uni.getWindowInfo().windowWidth;
 			this.mSceneHeight = this.modelHeight; // 设置3D模型区域高度
@@ -170,6 +172,10 @@
 			}
 		},
 		methods: {
+			async getAdvice(){
+				const {data} = getHealthReport()
+				console.log(data)
+			},
 			// 初始化
 			init(canvas) {
 				// 创建场景

@@ -4,10 +4,11 @@
 		<view class="my">
 			<view class="userInfo">
 				<view class="avatar">
-					<image src="../../static/icon/avatar.png" mode="aspectFill" />
+					<image class="avatar" :src="userInfo.avatar || '../../../static/image/avatar.png'"
+					       mode="aspectFill"></image>
 				</view>
-				<view class="name">{{ userInfo.username ? userInfo.username : '未命名用户' }}</view>
-				<view class="address">来自于: {{ userInfo.city ? userInfo.city : '未知' }}</view>
+				<view class="username">{{ userInfo.username ? userInfo.username : '未命名用户' }}</view>
+				<view class="city">来自于: {{ userInfo.city ? userInfo.city : '未知' }}</view>
 			</view>
 			<view class="section">
 				<navigator url="/pages/my/second/userInfo">
@@ -107,10 +108,8 @@ export default {
 	},
 	methods: {
 		async getUserInfo() {
-			console.log(11)
 			const {data} = await getUserInfoAPI()
 			this.userInfo=data
-			console.log("后端数据",data)
 		},
 	},
 	mounted() {

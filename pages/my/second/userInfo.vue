@@ -23,10 +23,9 @@
           </view>
 
           <!-- 编辑模式：显示上传组件 -->
-          <view v-else class="avatar-upload-container">
-            <uni-file-picker ref="filePicker" :auto-upload="false" limit="1" file-mediatype="image"
-                             mode="grid" @select="handleFileSelect" @delete="handleFileDelete"
-                             :image-styles="imageStyles"></uni-file-picker>
+          <view v-else class="avatar-upload-container" @click="chooseImage">
+            <image v-if="avatar" :src="avatar" mode="aspectFill" :class="imageStyles"></image>
+            <uni-icons v-else type="plusempty" size="50" color="#999"></uni-icons>
           </view>
 
           <text class="username">{{ userInfo.username }}</text>
@@ -124,11 +123,8 @@
 </template>
 
 <script>
-import {http} from '@/utils/request';
-import { getUserInfoAPI } from '@/api/user';
-
-// 获取baseURL，用于文件上传
-const baseURL = 'http://localhost:8080';
+import { getUserInfoAPI, updateUserInfoAPI } from '@/api/user';
+import { uploadAPI } from '@/api/system';
 
 export default {
   data() {
@@ -139,18 +135,16 @@ export default {
       isEditMode: false,
       // 用户信息
       userInfo: {
-        userId: '1024888',
-        username: '张小明',
         gender: 1,
-        age: '28',
-        city: '上海',
-        healthStatus: '良好',
+        age: '20',
+        city: '未知',
+        healthStatus: '',
         avatar: '../../../static/image/avatar.png'
       },
       // 性别选项
       genderOptions: ['女', '男', '保密'],
       // 编辑前的备份数据
-      backupUserInfo: null,
+      avatar: null,
       // 选择的头像文件
       selectedFile: null,
       // 文件选择器样式配置
@@ -168,6 +162,26 @@ export default {
   },
  
   methods: {
+	  // 选择图片
+	  chooseImage() {
+	    uni.chooseImage({
+	      count: 1, // 默认9
+	      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+	      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+	      success: (res) => {
+	        // 获取图片临时路径
+	        this.avatar = res.tempFilePaths[0];
+	        this.uploadStatus = '';
+	      },
+	      fail: (err) => {
+	        console.error('选择图片失败:', err);
+	        uni.showToast({
+	          title: '选择图片失败',
+	          icon: 'none'
+	        });
+	      }
+	    });
+	  },
     // 返回上一页
     handleBack() {
       if (this.isEditMode) {
@@ -254,8 +268,8 @@ export default {
       };
 
       // 如果有选择新头像，先上传头像文件
-      if (this.selectedFile) {
-        this.uploadAvatar(this.selectedFile.url, userData);
+      if (this.avatar) {
+        this.uploadAvatar(this.avatar, userData);
       } else {
         // 没有新头像，直接保存用户信息
         this.submitUserInfo(userData);
@@ -263,69 +277,61 @@ export default {
     },
 
     // 上传头像到服务器
-    uploadAvatar(filePath, userData) {
-      uni.uploadFile({
-        url: baseURL + '/sht/user/file', // 头像上传API
-        filePath: filePath,
-        name: 'file',
-        formData: {
-          userId: this.userInfo.userId
-        },
-        success: (uploadRes) => {
-          try {
-			
-			const resData = JSON.parse(uploadRes.data)
-			console.log("文件上传成功信息",resData)
-            if (resData.code===200) {
-              // 上传成功，将头像URL添加到用户数据中
-              userData.avatar = resData.data.value
-			  console.log("头像信息：",userData.avatar)
-              // 保存用户信息到服务器
-              this.submitUserInfo(userData);
-            } else {
-              this.handleError(result.msg || '头像上传失败');
-            }
-          } catch (e) {
-            this.handleError('头像上传异常');
-          }
-        },
-        fail: () => {
-          this.handleError('头像上传失败，请检查网络连接');
-        }
-      });
+    async uploadAvatar(filePath, userData) {
+		try {
+		  uni.showLoading({
+		    title: '上传中',
+		    mask: true
+		  });
+		  
+		  // 调用上传API
+		  const resData = await uploadAPI(this.avatar);
+		  
+		  // 上传成功处理
+		  this.uploadStatus = '上传成功';
+		  uni.showToast({
+		    title: '上传成功',
+		    icon: 'success'
+		  });
+		  userData.avatar = resData.data.value
+		  console.log("头像信息：",userData.avatar)
+		  // 保存用户信息到服务器
+		  this.submitUserInfo(userData);
+		  
+		} catch (error) {
+		  console.error('上传失败:', error);
+		  this.uploadStatus = '上传失败';
+		  uni.showToast({
+		    title: '上传失败',
+		    icon: 'none'
+		  });
+		} finally {
+		  uni.hideLoading();
+		}
     },
 
     // 提交用户信息到后端
-    submitUserInfo(userData) {
-      http({
-        url: '/sht/user/info',
-        method: 'POST',
-        data: userData
-      }).then(res => {
-        // 保存成功
-        uni.hideLoading();
-        uni.showToast({
-          title: '个人信息保存成功',
-          icon: 'success'
-        });
-
-        // 将新头像更新到用户信息中
-        if (this.selectedFile && userData.avatar) {
-          this.userInfo.avatar = userData.avatar;
-        }
-
-        // 更新备份数据
-        this.backupUserInfo = JSON.parse(JSON.stringify(this.userInfo));
-        this.isEditMode = false;
-        this.selectedFile = null;
-
-        // 重置文件选择器
-        if (this.$refs.filePicker) {
-          this.$refs.filePicker.clearFiles();
-        }
-      }).catch(err => {
-        this.handleError(err.data?.msg || '保存失败');
-      });
+    async submitUserInfo(userData) {
+	   await updateUserInfoAPI(userData)
+	   uni.showToast({
+	     title: '个人信息保存成功',
+	     icon: 'success'
+	   });
+	   
+	   // 将新头像更新到用户信息中
+	   if (this.selectedFile && userData.avatar) {
+	     this.userInfo.avatar = userData.avatar;
+	   }
+	   
+	   // 更新备份数据
+	   this.backupUserInfo = JSON.parse(JSON.stringify(this.userInfo));
+	   this.isEditMode = false;
+	   this.selectedFile = null;
+	   
+	   // 重置文件选择器
+	   if (this.$refs.filePicker) {
+	     this.$refs.filePicker.clearFiles();
+	   }
     },
 
     // 处理错误
@@ -366,26 +372,14 @@ export default {
         this.userInfo.age = (currentAge - 1).toString();
       }
     },
-
-    // 获取用户信息
-    getUserInfo() {
-      http({
-        url: '/sht/user/info',
-        method: 'GET'
-      }).then(res => {
-        if (res.code === 200) {
-          this.userInfo = res.data;
-          // 备份初始数据
-          this.backupUserInfo = JSON.parse(JSON.stringify(this.userInfo));
-        }
-      }).catch(err => {
-        console.error('获取用户信息失败', err);
-      });
-    }
+	async getUserInfo() {
+		const {data} = await getUserInfoAPI()
+		this.userInfo=data
+	},
   },
   onLoad() {
     // 页面加载时从服务器获取用户信息
-    this.getUserInfo();
+    this.getUserInfo()
   }
 };
 </script>
@@ -478,14 +472,28 @@ page {
   object-fit: cover;
 }
 
-/* 上传头像组件样式 */
+/* 头像上传容器 - 极简版本 */
 .avatar-upload-container {
   width: 120px;
   height: 120px;
-  margin-bottom: 16px;
+  border: 1px solid #ddd; /* 浅灰色边框 */
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* 确保图片不溢出 */
+  background-color: #f5f5f5; /* 浅灰色背景 */
+  
+  /* 图片样式 - 等比例填充 */
+  image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 关键属性：等比例填充容器 */
+  }
+  
+  /* 加号图标样式 */
+  .uni-icons {
+    color: #999; /* 灰色图标 */
+  }
 }
 
 .username {

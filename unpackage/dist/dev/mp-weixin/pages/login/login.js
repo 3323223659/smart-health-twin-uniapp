@@ -285,11 +285,12 @@ var _default = {
                 console.log(data);
                 if (data.message === 'success') {
                   uni.showToast({
-                    title: '注册成功，请去登录',
+                    title: '注册成功',
                     icon: 'none'
                   });
                 }
-              case 6:
+                _this3.login();
+              case 7:
               case "end":
                 return _context2.stop();
             }
