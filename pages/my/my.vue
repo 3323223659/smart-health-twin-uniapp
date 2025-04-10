@@ -49,7 +49,7 @@
 				<!-- <navigator url="/pages/my/second/upLoad">
 					<view class="row">
 						<view class="left">
-							<uni-icons type="cloud-upload" color="#32CD32" size="24" /> 
+							<uni-icons type="cloud-upload" color="#32CD32" size="24" />
 							<view class="text">导出报告</view>
 						</view>
 						<view class="right">
@@ -71,13 +71,13 @@
 						  </view>
 				          <button class="customer" open-type="contact">联系客服</button>
 				        </view>
-						
+
 			</view>
 			<view class="section">
 				<navigator url="/pages/my/second/setting">
 					<view class="row">
 						<view class="left">
-							<uni-icons type="gear" color="#32CD32" size="24" />      
+							<uni-icons type="gear" color="#32CD32" size="24" />
 							<view class="text">设置</view>
 						</view>
 						<view class="right">
@@ -112,7 +112,7 @@ export default {
 			this.userInfo=data
 		},
 	},
-	mounted() {
+	onShow() {
 	    this.getUserInfo();
 	},
 };
