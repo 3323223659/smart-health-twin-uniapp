@@ -114,7 +114,7 @@
 		OrbitControls
 	} from '../../lib/OrbitControls.js'
 	import GLTF from '../../lib/GLTFLoader.js'
-	import { getHealthReport } from '@/api/user';
+	import { getHealthReport, getHealthAdvice } from '@/api/user';
 
 	export default {
 		data() {
@@ -173,7 +173,10 @@
 		},
 		methods: {
 			async getAdvice(){
-				const {data} = getHealthReport()
+				const {data} = getHealthAdvice()
+				console.log(data)
+				console.log(data)
+				console.log(data)
 				console.log(data)
 			},
 			// 初始化

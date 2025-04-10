@@ -60,7 +60,6 @@ export default {
     async initHealthReport(){
     	const { data } = await getHealthReport()
     	this.imageUrl = data.photoPath
-
     },
     // 选择图片
     chooseImage() {

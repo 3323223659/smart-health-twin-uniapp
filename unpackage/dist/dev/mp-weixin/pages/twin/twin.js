@@ -319,14 +319,17 @@ var _default = {
   methods: {
     getAdvice: function getAdvice() {
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var _getHealthReport, data;
+        var _getHealthAdvice, data;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _getHealthReport = (0, _user.getHealthReport)(), data = _getHealthReport.data;
+                _getHealthAdvice = (0, _user.getHealthAdvice)(), data = _getHealthAdvice.data;
                 console.log(data);
-              case 2:
+                console.log(data);
+                console.log(data);
+                console.log(data);
+              case 5:
               case "end":
                 return _context.stop();
             }

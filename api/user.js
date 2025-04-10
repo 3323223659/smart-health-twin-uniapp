@@ -53,4 +53,13 @@ export const getHealthReport = () => {
   });
 };
 
+//获取健康建议
+export const getHealthAdvice = () => {
+  return http({
+    url: '/sht/user/healthReport/suggestion',
+    method: 'GET',
+    
+  });
+};
+
 

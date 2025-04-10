@@ -11589,7 +11589,7 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.uploadHealthReport = exports.updateUserInfoAPI = exports.registerAPI = exports.loginAPI = exports.getUserInfoAPI = exports.getHealthReport = void 0;
+exports.uploadHealthReport = exports.updateUserInfoAPI = exports.registerAPI = exports.loginAPI = exports.getUserInfoAPI = exports.getHealthReport = exports.getHealthAdvice = void 0;
 var _request = __webpack_require__(/*! ../utils/request */ 37);
 // 用户登录
 var loginAPI = function loginAPI(data) {
@@ -11647,7 +11647,16 @@ var getHealthReport = function getHealthReport() {
     method: 'GET'
   });
 };
+
+//获取健康建议
 exports.getHealthReport = getHealthReport;
+var getHealthAdvice = function getHealthAdvice() {
+  return (0, _request.http)({
+    url: '/sht/user/healthReport/suggestion',
+    method: 'GET'
+  });
+};
+exports.getHealthAdvice = getHealthAdvice;
 
 /***/ }),
 /* 48 */,
