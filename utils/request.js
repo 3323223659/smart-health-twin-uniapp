@@ -20,7 +20,7 @@ export const initRequestInterceptor = (store) => {
         options.url = `${baseURL}/${path}`;
       }
       
-      options.timeout = 10000;
+      options.timeout = 100000;
       
       // 添加请求头
       options.header = {

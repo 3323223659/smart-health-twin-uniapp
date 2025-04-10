@@ -11113,7 +11113,7 @@ var initRequestInterceptor = function initRequestInterceptor(store) {
         var path = options.url.startsWith('/') ? options.url.slice(1) : options.url;
         options.url = "".concat(baseURL, "/").concat(path);
       }
-      options.timeout = 10000;
+      options.timeout = 100000;
 
       // 添加请求头
       options.header = _objectSpread(_objectSpread({}, options.header), {}, {
