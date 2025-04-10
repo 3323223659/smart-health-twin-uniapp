@@ -295,6 +295,7 @@ export default {
 		  });
 		  userData.avatar = resData.data.value
 		  console.log("头像信息：",userData.avatar)
+		  this.userInfo.avatar=userData.avatar
 		  // 保存用户信息到服务器
 		  this.submitUserInfo(userData);
 		  
