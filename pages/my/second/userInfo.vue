@@ -375,6 +375,12 @@ export default {
 	async getUserInfo() {
 		const {data} = await getUserInfoAPI()
 		this.userInfo=data
+		if(this.userInfo.age === null){
+			this.userInfo.age = 20
+		}
+		if(this.userInfo.city === null){
+			this.userInfo.city = '请设置'
+		}
 	},
   },
   onLoad() {

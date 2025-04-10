@@ -585,7 +585,13 @@ var _default = {
                 _yield$getUserInfoAPI = _context3.sent;
                 data = _yield$getUserInfoAPI.data;
                 _this5.userInfo = data;
-              case 5:
+                if (_this5.userInfo.age === null) {
+                  _this5.userInfo.age = 20;
+                }
+                if (_this5.userInfo.city === null) {
+                  _this5.userInfo.city = '请设置';
+                }
+              case 7:
               case "end":
                 return _context3.stop();
             }
