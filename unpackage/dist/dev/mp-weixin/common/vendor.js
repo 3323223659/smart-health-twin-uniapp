@@ -9514,9 +9514,9 @@ internalMixin(Vue);
 
 /***/ }),
 /* 26 */
-/*!********************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/pages.json ***!
-  \********************************************************/
+/*!************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/pages.json ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9660,9 +9660,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 33 */
-/*!**********************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/uni.promisify.adaptor.js ***!
-  \**********************************************************************/
+/*!**************************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/uni.promisify.adaptor.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9684,9 +9684,9 @@ uni.addInterceptor({
 
 /***/ }),
 /* 34 */
-/*!*************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/stores/index.js ***!
-  \*************************************************************/
+/*!*****************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/stores/index.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10970,9 +10970,9 @@ module.exports = index_cjs;
 
 /***/ }),
 /* 36 */
-/*!********************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/stores/modules/user.js ***!
-  \********************************************************************/
+/*!************************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/stores/modules/user.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11078,9 +11078,9 @@ exports.default = _default;
 
 /***/ }),
 /* 37 */
-/*!**************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/utils/request.js ***!
-  \**************************************************************/
+/*!******************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/utils/request.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11577,9 +11577,9 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 
 /***/ }),
 /* 47 */
-/*!*********************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/api/user.js ***!
-  \*********************************************************/
+/*!*************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/api/user.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11676,9 +11676,9 @@ exports.getHealthAdvice = getHealthAdvice;
 /* 62 */,
 /* 63 */,
 /* 64 */
-/*!****************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/lib/three.weapp.js ***!
-  \****************************************************************/
+/*!********************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/lib/three.weapp.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11690,9 +11690,9 @@ exports.getHealthAdvice = getHealthAdvice;
 
 /***/ }),
 /* 65 */
-/*!******************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/lib/OrbitControls.js ***!
-  \******************************************************************/
+/*!**********************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/lib/OrbitControls.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12447,9 +12447,9 @@ MapControls.prototype.constructor = MapControls;
 
 /***/ }),
 /* 66 */
-/*!***************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/lib/GLTFLoader.js ***!
-  \***************************************************************/
+/*!*******************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/lib/GLTFLoader.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14556,9 +14556,9 @@ function _default(THREE) {
 /* 73 */,
 /* 74 */,
 /* 75 */
-/*!***********************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/api/system.js ***!
-  \***********************************************************/
+/*!***************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/api/system.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14685,9 +14685,9 @@ exports.chatAPI = chatAPI;
 /* 145 */,
 /* 146 */,
 /* 147 */
-/*!**************************************************************************************************************!*\
-  !*** E:/WeChat/uni-app/smart-health-uniapp/node_modules/@dcloudio/uni-ui/lib/uni-icons/uniicons_file_vue.js ***!
-  \**************************************************************************************************************/
+/*!******************************************************************************************************************************!*\
+  !*** D:/code/SmartHealthTwin/smart-health-twin-uniapp-vue2/node_modules/@dcloudio/uni-ui/lib/uni-icons/uniicons_file_vue.js ***!
+  \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
