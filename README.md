@@ -13,4 +13,4 @@ UniApp+Vue2+ElementPlus+Echarts+Axios+Router+ThreeJS
 
 #### 安装教程
 pull 该项目
-微信开发者工具打开导入smart-health-twin-uniapp-vue2\unpackage\dist\dev\mp-weixin 文件夹启动项目
+找到代码压缩包中smart-health-twin-uniapp-vue2\unpackage\dist\dev\mp-weixin，将这个mp-weixin 文件夹用微信开发者工具打开编译运行即可
